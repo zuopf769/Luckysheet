@@ -6,6 +6,7 @@ import luckysheetDropCell from "./dropCell";
 import luckysheetPostil from "./postil";
 import imageCtrl from "./imageCtrl";
 import hyperlinkCtrl from "./hyperlinkCtrl";
+import selectListCtrl from "./selectListCtrl";
 import dataVerificationCtrl from "./dataVerificationCtrl";
 import menuButton from "./menuButton";
 import conditionformat from "./conditionformat";
@@ -5519,6 +5520,25 @@ export default function luckysheetHandler() {
         }
         if (!checkProtectionNotEnable(Store.currentSheetIndex)) {
             return;
+            return;
+        }
+
+        hyperlinkCtrl.createDialog();
+        hyperlinkCtrl.init();
+    });
+    $("#luckysheetInsertLink").click(function() {
+        $("#luckysheet-insertLink-btn-title").click();
+        $("#luckysheet-rightclick-menu").hide();
+    });
+
+    
+    //菜单栏 插入下拉列表参照按钮
+    $("#luckysheet-insertSelect-btn-title").click(function() {
+        // *如果禁止前台编辑，则中止下一步操作
+        if (!checkIsAllowEdit()) {
+            tooltip.info("", locale().pivotTable.errorNotAllowEdit);
+        }
+        if (!checkProtectionNotEnable(Store.currentSheetIndex)) {
             return;
         }
 

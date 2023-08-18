@@ -1,0 +1,30 @@
+{
+  "id": "4215650",
+  "name": "Luckysheet",
+  "font_family": "iconfont-luckysheet2",
+  "css_prefix_text": "luckysheet2-iconfont",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "887799",
+      "name": "菜单 (1)",
+      "font_class": "-menu",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "2803710",
+      "name": "增加",
+      "font_class": "-plus",
+      "unicode": "e69c",
+      "unicode_decimal": 59036
+    },
+    {
+      "icon_id": "31238542",
+      "name": "下拉列表",
+      "font_class": "-dropdown",
+      "unicode": "e69d",
+      "unicode_decimal": 59037
+    }
+  ]
+}

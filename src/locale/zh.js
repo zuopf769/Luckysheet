@@ -6084,6 +6084,7 @@ export default {
         insertImage: "插入图片",
         exportXlsx: "导出Xlsx",
         insertLink: "插入链接",
+        insertSelect: "插入下拉列表",
         dataVerification: "数据验证",
         protection: "保护工作表内容",
 

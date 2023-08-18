@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "iconfont-luckysheet2"; /* Project id 4215650 */
+  src: url('iconfont.woff2?t=1692327023055') format('woff2'),
+       url('iconfont.woff?t=1692327023055') format('woff'),
+       url('iconfont.ttf?t=1692327023055') format('truetype');
+}
+
+.iconfont-luckysheet2 {
+  font-family: "iconfont-luckysheet2" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.luckysheet2-iconfont-menu:before {
+  content: "\e611";
+}
+
+.luckysheet2-iconfont-plus:before {
+  content: "\e69c";
+}
+
+.luckysheet2-iconfont-dropdown:before {
+  content: "\e69d";
+}
+

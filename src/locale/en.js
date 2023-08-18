@@ -6151,6 +6151,7 @@ export default {
         insertImage: "Insert image",
         exportXlsx: "Export Xlsx",
         insertLink: "Insert link",
+        insertSelect: "Insert select list",
         dataVerification: "Data verification",
         protection: "Protect the sheet",
 
