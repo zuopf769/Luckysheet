@@ -5531,7 +5531,7 @@ export default function luckysheetHandler() {
         $("#luckysheet-rightclick-menu").hide();
     });
 
-    
+
     //菜单栏 插入下拉列表参照按钮
     $("#luckysheet-insertSelect-btn-title").click(function() {
         // *如果禁止前台编辑，则中止下一步操作
@@ -5542,11 +5542,11 @@ export default function luckysheetHandler() {
             return;
         }
 
-        hyperlinkCtrl.createDialog();
-        hyperlinkCtrl.init();
+        selectListCtrl.createDialog();
+        selectListCtrl.init();
     });
-    $("#luckysheetInsertLink").click(function() {
-        $("#luckysheet-insertLink-btn-title").click();
+    $("#luckysheetInsertSelect").click(function() {
+        $("#luckysheet-insertSelect-btn-title").click();
         $("#luckysheet-rightclick-menu").hide();
     });
 

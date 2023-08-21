@@ -14,33 +14,33 @@ const gridHTML = function() {
             : luckysheetConfigsetting.userInfo; // When true, use the default HTML string. The rendering of userInfo below uses nested template strings. Otherwise, when display is used and the image path is not passed in, there will be an undefined request
 
     return `<div class="luckysheet">
-                    <canvas id="luckysheetTableContentF" style="display:none;" class="luckysheetTableContent"></canvas> 
-                    <div class="luckysheet-work-area luckysheet-noselected-text"> 
-                        <div id ="luckysheet_info_detail" class="luckysheet_info_detail"> 
+                    <canvas id="luckysheetTableContentF" style="display:none;" class="luckysheetTableContent"></canvas>
+                    <div class="luckysheet-work-area luckysheet-noselected-text">
+                        <div id ="luckysheet_info_detail" class="luckysheet_info_detail">
                             <div data-tips="${
                                 locale_info.return
-                            }" id="luckysheet_info_detail_title" class="luckysheet_info_detail_back"> 
-                                <i style="color:#444D5A;" class="fa fa-angle-left fa-2x" aria-hidden="true"></i> 
-                            </div> 
+                            }" id="luckysheet_info_detail_title" class="luckysheet_info_detail_back">
+                                <i style="color:#444D5A;" class="fa fa-angle-left fa-2x" aria-hidden="true"></i>
+                            </div>
                             <div class="luckysheet-share-logo" title="\${logotitle}"></div>
-                            <div class="sheet-name"> 
+                            <div class="sheet-name">
                                 <input data-tips="${
                                     locale_info.tips
                                 }" id="luckysheet_info_detail_input" class="luckysheet_info_detail_input luckysheet-mousedown-cancel" value="${
         locale_info.noName
     }" tabindex="0" dir="ltr" aria-label="${
         locale_info.rename
-    }" style="visibility: visible; width: 149px;" data-tooltip="${locale_info.rename}"> 
-                            </div> 
+    }" style="visibility: visible; width: 149px;" data-tooltip="${locale_info.rename}">
+                            </div>
                             <div id="luckysheet_info_detail_update" class="luckysheet_info_detail_update"> ${
                                 locale_info.detailUpdate
-                            } </div> 
+                            } </div>
                             <div id="luckysheet_info_detail_save" class="luckysheet_info_detail_save"> ${
                                 locale_info.wait
                             } </div>
-                            
+
                             \${functionButton}
-                            
+
                             ${
                                 getObjType(userInfo) === "string"
                                     ? `<div class="luckysheet_info_detail_user">
@@ -50,104 +50,104 @@ const gridHTML = function() {
 
                             ${
                                 getObjType(userInfo) === "object"
-                                    ? `<div class="luckysheet_info_detail_user">                            
+                                    ? `<div class="luckysheet_info_detail_user">
                             <img src="${userInfo.userImage}" id="luckysheet_info_detail_user_img">
                             <span id="luckysheet_info_detail_user">${userInfo.userName}</span>
                             </div>`
                                     : ""
                             }
-                            
-                        </div> 
-                        <div id="luckysheet-wa-editor" class="luckysheet-wa-editor toolbar"> \${menu} </div> 
-                        <div id="luckysheet-wa-calculate" class="luckysheet-wa-calculate"> 
-                            <div class="luckysheet-wa-calculate-size" id="luckysheet-wa-calculate-size"></div> 
-                            <div class="luckysheet-wa-calculate-help"> 
-                                <div class="luckysheet-wa-calculate-help-box"> 
+
+                        </div>
+                        <div id="luckysheet-wa-editor" class="luckysheet-wa-editor toolbar"> \${menu} </div>
+                        <div id="luckysheet-wa-calculate" class="luckysheet-wa-calculate">
+                            <div class="luckysheet-wa-calculate-size" id="luckysheet-wa-calculate-size"></div>
+                            <div class="luckysheet-wa-calculate-help">
+                                <div class="luckysheet-wa-calculate-help-box">
                                     <div spellcheck="false" aria-hidden="false" id="luckysheet-helpbox">
                                         <div id="luckysheet-helpbox-cell" class="luckysheet-helpbox-cell-input luckysheet-mousedown-cancel" tabindex="0" contenteditable="true" dir="ltr" aria-autocomplete="list"></div>
-                                    </div> 
-                                </div>  
+                                    </div>
+                                </div>
                                 <div class="luckysheet-wa-calculate-help-tool">
                                     <i class="fa fa-caret-down" aria-hidden="true"></i>
-                                </div> 
-                            </div> 
+                                </div>
+                            </div>
                             <div id="luckysheet-wa-functionbox-cancel" class="luckysheet-wa-functionbox">
                                 <span><i class="iconfont-luckysheet luckysheet-iconfont-qingchu" aria-hidden="true"></i></span>
-                            </div> 
+                            </div>
                             <div id="luckysheet-wa-functionbox-confirm" class="luckysheet-wa-functionbox">
                                 <span><i class="iconfont-luckysheet luckysheet-iconfont-yunhang" aria-hidden="true"></i></span>
-                            </div> 
+                            </div>
                             <div id="luckysheet-wa-functionbox-fx" class="luckysheet-wa-functionbox">
-                                <span><i class="iconfont-luckysheet luckysheet-iconfont-hanshu" aria-hidden="true" style="color:#333"></i></span> 
-                            </div> 
+                                <span><i class="iconfont-luckysheet luckysheet-iconfont-hanshu" aria-hidden="true" style="color:#333"></i></span>
+                            </div>
                             <div id="luckysheet-functionbox-container" class="luckysheet-mousedown-cancel">
                                 <div class="luckysheet-mousedown-cancel" dir="ltr">
                                     <div spellcheck="false" aria-hidden="false" id="luckysheet-functionbox">
                                         <div id="luckysheet-functionbox-cell" class="luckysheet-functionbox-cell-input luckysheet-mousedown-cancel" tabindex="0" contenteditable="true" dir="ltr" aria-autocomplete="list" aria-label="D4"></div>
                                     </div>
                                 </div>
-                            </div>   
-                        </div> 
-                    </div> 
-                    <div class="luckysheet-grid-container luckysheet-scrollbars-enabled"> 
-                        <div class="luckysheet-grid-window"> 
-                            <div class="luckysheet-help-sub"></div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="luckysheet-grid-container luckysheet-scrollbars-enabled">
+                        <div class="luckysheet-grid-window">
+                            <div class="luckysheet-help-sub"></div>
                             <div class="luckysheet-grid-window-1" id="luckysheet-grid-window-1">
-                                <canvas id="luckysheetTableContent" class="luckysheetTableContent"></canvas> 
-                                <table class="luckysheet-grid-window-2" cellspacing="0" cellpadding="0" dir="ltr" tabindex="-1" > 
-                                    <tbody> 
-                                        <tr> 
-                                            <td valign="top" class="luckysheet-paneswrapper"> 
-                                                <div class="luckysheet-left-top" id="luckysheet-left-top"> </div> 
-                                            </td> 
-                                            <td valign="top" class="luckysheet-paneswrapper"> 
+                                <canvas id="luckysheetTableContent" class="luckysheetTableContent"></canvas>
+                                <table class="luckysheet-grid-window-2" cellspacing="0" cellpadding="0" dir="ltr" tabindex="-1" >
+                                    <tbody>
+                                        <tr>
+                                            <td valign="top" class="luckysheet-paneswrapper">
+                                                <div class="luckysheet-left-top" id="luckysheet-left-top"> </div>
+                                            </td>
+                                            <td valign="top" class="luckysheet-paneswrapper">
                                                 <div id="luckysheet-cols-h-c" class="luckysheet-cols-h-c">
-                                                    <div class="luckysheet-cols-change-size" id="luckysheet-cols-change-size"></div>  
-                                                    <div class="luckysheet-cols-menu-btn luckysheet-mousedown-cancel" id="luckysheet-cols-menu-btn"><i class="fa fa-caret-down luckysheet-mousedown-cancel" aria-hidden="true"></i></div>  
-                                                    <div class="luckysheet-cols-h-hover" id="luckysheet-cols-h-hover"></div>  
-                                                    <div id="luckysheet-cols-h-selected"></div>  
-                                                    <div class="luckysheet-grdusedrange"></div>  
+                                                    <div class="luckysheet-cols-change-size" id="luckysheet-cols-change-size"></div>
+                                                    <div class="luckysheet-cols-menu-btn luckysheet-mousedown-cancel" id="luckysheet-cols-menu-btn"><i class="fa fa-caret-down luckysheet-mousedown-cancel" aria-hidden="true"></i></div>
+                                                    <div class="luckysheet-cols-h-hover" id="luckysheet-cols-h-hover"></div>
+                                                    <div id="luckysheet-cols-h-selected"></div>
+                                                    <div class="luckysheet-grdusedrange"></div>
                                                     <div class="luckysheet-grdblkflowpush"></div>  \${columnHeader}
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td valign="top" class="luckysheet-paneswrapper"> 
-                                                <div class="luckysheet-rows-h" id="luckysheet-rows-h"> 
-                                                    <div class="luckysheet-rows-change-size" id="luckysheet-rows-change-size"></div> 
-                                                    <div class="luckysheet-rows-h-hover" id="luckysheet-rows-h-hover"></div> 
-                                                    <div id="luckysheet-rows-h-selected"></div>  
-                                                    <div class="luckysheet-grdusedrange"></div>  
+                                            <td valign="top" class="luckysheet-paneswrapper">
+                                                <div class="luckysheet-rows-h" id="luckysheet-rows-h">
+                                                    <div class="luckysheet-rows-change-size" id="luckysheet-rows-change-size"></div>
+                                                    <div class="luckysheet-rows-h-hover" id="luckysheet-rows-h-hover"></div>
+                                                    <div id="luckysheet-rows-h-selected"></div>
+                                                    <div class="luckysheet-grdusedrange"></div>
                                                     <div class="luckysheet-grdblkflowpush"></div> \${rowHeader}
-                                                </div> 
-                                            </td>  
+                                                </div>
+                                            </td>
                                             <td valign="top" class="luckysheet-paneswrapper">
                                                 <div class="luckysheet-cell-loading" id="luckysheet-cell-loading">
                                                     <div class="luckysheet-cell-loading-inner">
                                                         <i class="fa fa-circle-o-notch fa-spin"></i>
                                                         <span></span>
                                                     </div>
-                                                </div> 
-                                                <div class="luckysheet-cell-freezen"></div> 
-                                                <div class="luckysheet-scrollbars luckysheet-scrollbar-ltr luckysheet-scrollbar-x" id="luckysheet-scrollbar-x"><div></div></div> 
-                                                <div class="luckysheet-scrollbars luckysheet-scrollbar-ltr luckysheet-scrollbar-y" id="luckysheet-scrollbar-y"><div></div></div> 
+                                                </div>
+                                                <div class="luckysheet-cell-freezen"></div>
+                                                <div class="luckysheet-scrollbars luckysheet-scrollbar-ltr luckysheet-scrollbar-x" id="luckysheet-scrollbar-x"><div></div></div>
+                                                <div class="luckysheet-scrollbars luckysheet-scrollbar-ltr luckysheet-scrollbar-y" id="luckysheet-scrollbar-y"><div></div></div>
                                                 <div class="luckysheet-cell-main " id="luckysheet-cell-main">
-                                                    <div id="luckysheet-formula-functionrange"></div>  
+                                                    <div id="luckysheet-formula-functionrange"></div>
                                                     <div id="luckysheet-formula-functionrange-select" class="luckysheet-selection-copy luckysheet-formula-functionrange-select">
                                                         <div class="luckysheet-selection-copy-top luckysheet-copy"></div>
                                                         <div class="luckysheet-selection-copy-right luckysheet-copy"></div>
                                                         <div class="luckysheet-selection-copy-bottom luckysheet-copy"></div>
                                                         <div class="luckysheet-selection-copy-left luckysheet-copy"></div>
                                                         <div class="luckysheet-selection-copy-hc"></div>
-                                                    </div>  
+                                                    </div>
                                                     <div class="luckysheet-row-count-show luckysheet-count-show" id="luckysheet-row-count-show"></div>
                                                     <div class="luckysheet-column-count-show luckysheet-count-show" id="luckysheet-column-count-show"></div>
-                                                    <div class="luckysheet-change-size-line" id="luckysheet-change-size-line"></div>  
-                                                    <div class="luckysheet-cell-selected-focus" id="luckysheet-cell-selected-focus"></div>  
-                                                    <div id="luckysheet-selection-copy"></div>  
+                                                    <div class="luckysheet-change-size-line" id="luckysheet-change-size-line"></div>
+                                                    <div class="luckysheet-cell-selected-focus" id="luckysheet-cell-selected-focus"></div>
+                                                    <div id="luckysheet-selection-copy"></div>
                                                     <div id="luckysheet-chart-rangeShow"></div>
-                                                    <div class="luckysheet-cell-selected-extend" id="luckysheet-cell-selected-extend"></div>  
-                                                    <div class="luckysheet-cell-selected-move" id="luckysheet-cell-selected-move"></div>  
+                                                    <div class="luckysheet-cell-selected-extend" id="luckysheet-cell-selected-extend"></div>
+                                                    <div class="luckysheet-cell-selected-move" id="luckysheet-cell-selected-move"></div>
                                                     <div id="luckysheet-cell-selected-boxs">
                                                         <div id="luckysheet-cell-selected" class="luckysheet-cell-selected">
                                                             <div class="luckysheet-cs-inner-border"></div>
@@ -162,12 +162,12 @@ const gridHTML = function() {
                                                         </div>
                                                     </div>
                                                     <div id="luckysheet-postil-showBoxs"></div>
-                                                    <div id="luckysheet-multipleRange-show"></div>  
-                                                    <div id="luckysheet-dynamicArray-hightShow"></div>  
+                                                    <div id="luckysheet-multipleRange-show"></div>
+                                                    <div id="luckysheet-dynamicArray-hightShow"></div>
                                                     <div id="luckysheet-image-showBoxs">
                                                         <div id="luckysheet-modal-dialog-activeImage" class="luckysheet-modal-dialog" style="display:none;padding:0;position:absolute;z-index:300;">
-                                                            <div class="luckysheet-modal-dialog-border" style="position:absolute;"></div> 
-                                                            <div class="luckysheet-modal-dialog-content"></div>  
+                                                            <div class="luckysheet-modal-dialog-border" style="position:absolute;"></div>
+                                                            <div class="luckysheet-modal-dialog-content"></div>
                                                             <div class="luckysheet-modal-dialog-resize">
                                                                 <div class="luckysheet-modal-dialog-resize-item luckysheet-modal-dialog-resize-item-lt" data-type="lt"></div>
                                                                 <div class="luckysheet-modal-dialog-resize-item luckysheet-modal-dialog-resize-item-mt" data-type="mt"></div>
@@ -195,13 +195,13 @@ const gridHTML = function() {
                                                             <div class="cropping-content"></div>
                                                             <div class="luckysheet-modal-dialog-border" style="position:absolute;"></div>
                                                             <div class="luckysheet-modal-dialog-resize">
-                                                                <div class="resize-item lt" data-type="lt"></div> 
-                                                                <div class="resize-item mt" data-type="mt"></div> 
-                                                                <div class="resize-item lm" data-type="lm"></div> 
-                                                                <div class="resize-item rm" data-type="rm"></div> 
-                                                                <div class="resize-item rt" data-type="rt"></div> 
-                                                                <div class="resize-item lb" data-type="lb"></div> 
-                                                                <div class="resize-item mb" data-type="mb"></div> 
+                                                                <div class="resize-item lt" data-type="lt"></div>
+                                                                <div class="resize-item mt" data-type="mt"></div>
+                                                                <div class="resize-item lm" data-type="lm"></div>
+                                                                <div class="resize-item rm" data-type="rm"></div>
+                                                                <div class="resize-item rt" data-type="rt"></div>
+                                                                <div class="resize-item lb" data-type="lb"></div>
+                                                                <div class="resize-item mb" data-type="mb"></div>
                                                                 <div class="resize-item rb" data-type="rb"></div>
                                                             </div>
                                                             <div class="luckysheet-modal-dialog-controll">
@@ -225,14 +225,14 @@ const gridHTML = function() {
                                                     <div id="luckysheet-formula-refresh"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M4 20v-2h2.75l-.4-.35q-1.225-1.225-1.788-2.663T4 12.05q0-2.775 1.663-4.938T10 4.25v2.1Q8.2 7 7.1 8.562T6 12.05q0 1.125.425 2.188T7.75 16.2l.25.25V14h2v6H4Zm10-.25v-2.1q1.8-.65 2.9-2.212T18 11.95q0-1.125-.425-2.187T16.25 7.8L16 7.55V10h-2V4h6v2h-2.75l.4.35q1.225 1.225 1.788 2.663T20 11.95q0 2.775-1.663 4.938T14 19.75Z"/></svg></div>
                                                     <div id="luckysheet-dataVerification-dropdown-List" class="luckysheet-mousedown-cancel"></div>
                                                     <div id="luckysheet-dataVerification-showHintBox" class="luckysheet-mousedown-cancel"></div>
-                                                    <div class="luckysheet-cell-copy"></div>  
-                                                    <div class="luckysheet-grdblkflowpush"></div>  \${flow} 
-                                                </div> 
-                                            </td> 
-                                        </tr> 
-                                    </tbody> 
-                                </table> 
-                            </div> 
+                                                    <div class="luckysheet-cell-copy"></div>
+                                                    <div class="luckysheet-grdblkflowpush"></div>  \${flow}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="luckysheet-sheet-area luckysheet-noselected-text" id="luckysheet-sheet-area">
                                 <div id="luckysheet-sheet-content">
                                     <div id="luckysheet-sheets-add" class="luckysheet-sheets-add lucky-button-custom"><i class="iconfont-luckysheet luckysheet-iconfont-jia1"></i></div>
@@ -253,9 +253,9 @@ const gridHTML = function() {
                                     <div id="luckysheet-sheets-leftscroll" class="luckysheet-sheets-scroll lucky-button-custom"><i class="fa fa-caret-left"></i></div>
                                     <div id="luckysheet-sheets-rightscroll" class="luckysheet-sheets-scroll lucky-button-custom"><i class="fa fa-caret-right"></i></div>
                                 </div>
-                            </div> 
-                        </div> 
-                        <div class="luckysheet-stat-area"> 
+                            </div>
+                        </div>
+                        <div class="luckysheet-stat-area">
                             <div class="luckysheet-sta-c">
                                 <div class="luckysheet-zoom-content" id="luckysheet-zoom-content">
                                     <div class="luckysheet-zoom-minus" id="luckysheet-zoom-minus">
@@ -271,10 +271,10 @@ const gridHTML = function() {
                                     </div>
                                     <div class="luckysheet-zoom-ratioText" id="luckysheet-zoom-ratioText">100%</div>
                                 </div>
-                                <div class="luckysheet-sta-content" id="luckysheet-sta-content"></div>  
+                                <div class="luckysheet-sta-content" id="luckysheet-sta-content"></div>
                                 <!--<div class="luckysheet-bottom-content" id="luckysheet-bottom-content-show"></div> -->
-                            </div> 
-                        </div> 
+                            </div>
+                        </div>
                     </div>
                     <div id="luckysheet-copy-content" contenteditable="true"></div>
                     <input id="luckysheet-copy-btn" type="button" data-clipboard-target="luckysheet-copy-content">
@@ -604,6 +604,13 @@ function rightclickHTML() {
                             toolbar.insertLink
                         }</div>
                     </div>
+                    <div id="luckysheetInsertSelect" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
+                        config.select ? "block" : "none"
+                    };">
+                        <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
+                            toolbar.insertSelect
+                        }</div>
+                    </div>
                     <div id="luckysheetDataVerification" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                         config.data ? "block" : "none"
                     };">
@@ -676,9 +683,9 @@ function rightclickHTML() {
                     }</div>
                 </div>
             </div>
-            
+
             <!-- Revision: modeled on google sheet
-            
+
             <div id="luckysheetColsRowsHandleAdd_sub" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-rightgclick-menu-sub luckysheet-mousedown-cancel">
                 <div class="luckysheet-cols-menuitem luckysheet-mousedown-cancel">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">
@@ -717,11 +724,11 @@ function rightclickHTML() {
                     </div>
                 </div>
             </div>
-            
+
             -->
 
             <!-- delete row or column
-            
+
             <div id="luckysheetColsRowsHandleDel_sub" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-rightgclick-menu-sub luckysheet-mousedown-cancel">
                 <div id="luckysheet-delRows" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">
@@ -734,7 +741,7 @@ function rightclickHTML() {
                     </div>
                 </div>
             </div>
-            
+
             -->
 
             <!--
@@ -955,79 +962,79 @@ function sheetconfigHTML() {
         moveTopMenuseparator = false;
     }
 
-    const sheetconfigModel = `<div id="luckysheet-rightclick-sheet-menu" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-mousedown-cancel"> 
+    const sheetconfigModel = `<div id="luckysheet-rightclick-sheet-menu" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-mousedown-cancel">
                 <div id="luckysheetsheetconfigdelete" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.delete ? "block" : "none"
-                };"> 
+                };">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         sheetconfig.delete
                     }</div>
-                </div> 
+                </div>
                 <div id="luckysheetsheetconfigcopy" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.copy ? "block" : "none"
-                };"> 
-                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${sheetconfig.copy}</div> 
-                </div> 
+                };">
+                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${sheetconfig.copy}</div>
+                </div>
                 <div id="luckysheetsheetconfigrename" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.rename ? "block" : "none"
-                };"> 
+                };">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         sheetconfig.rename
-                    }</div> 
-                </div> 
+                    }</div>
+                </div>
                 <div id="luckysheetsheetconfigcolor" class="luckysheet-cols-menuitem luckysheet-cols-submenu luckysheet-mousedown-cancel" style="display:${
                     config.color ? "block" : "none"
-                };"> 
-                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel"> 
+                };">
+                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">
                         ${
                             sheetconfig.changeColor
-                        } <span class="luckysheet-submenu-arrow iconfont-luckysheet luckysheet-iconfont-youjiantou" style="user-select: none;"></span> 
-                    </div> 
-                </div> 
+                        } <span class="luckysheet-submenu-arrow iconfont-luckysheet luckysheet-iconfont-youjiantou" style="user-select: none;"></span>
+                    </div>
+                </div>
                 <div class="luckysheet-menuseparator luckysheet-mousedown-cancel" role="separator" style="display:${
                     hideTopMenuseparator ? "block" : "none"
-                };"></div> 
+                };"></div>
                 <div id="luckysheetsheetconfighide" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.hide ? "block" : "none"
-                };"> 
-                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${sheetconfig.hide}</div> 
-                </div> 
+                };">
+                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${sheetconfig.hide}</div>
+                </div>
                 <div id="luckysheetsheetconfigshow" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.hide ? "block" : "none"
-                };"> 
+                };">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         sheetconfig.unhide
-                    }</div> 
-                </div> 
+                    }</div>
+                </div>
                 <div class="luckysheet-menuseparator luckysheet-mousedown-cancel" role="separator" style="display:${
                     moveTopMenuseparator ? "block" : "none"
-                };"></div> 
+                };"></div>
                 <div id="luckysheetsheetconfigmoveleft" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.move ? "block" : "none"
-                };"> 
+                };">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         sheetconfig.moveLeft
-                    }</div> 
-                </div> 
+                    }</div>
+                </div>
                 <div id="luckysheetsheetconfigmoveright" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
                     config.move ? "block" : "none"
-                };"> 
+                };">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         sheetconfig.moveRight
-                    }</div> 
-                </div> 
-            </div> 
+                    }</div>
+                </div>
+            </div>
             <div id="luckysheetsheetconfigcolor_sub" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-rightgclick-menu-sub luckysheet-mousedown-cancel">
                 <div id="luckysheetsheetconfigcolorreset" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         sheetconfig.resetColor
                     }</div>
-                </div> 
-                <div class="luckysheet-mousedown-cancel"> 
-                    <div class="luckysheet-mousedown-cancel"> 
-                        <input type="text" id="luckysheetsheetconfigcolorur" /> 
-                    </div> 
-                </div> 
+                </div>
+                <div class="luckysheet-mousedown-cancel">
+                    <div class="luckysheet-mousedown-cancel">
+                        <input type="text" id="luckysheetsheetconfigcolorur" />
+                    </div>
+                </div>
             </div>`;
 
     return sheetconfigModel;
@@ -1269,13 +1276,13 @@ const luckysheetlodingHTML = function(target, coverConfig) {
     const imageHtml = luckysheetloadingImage(config);
     const id = "luckysheet-loading-" + uuid.v4();
     const loadingHtml = `
-        <div class="luckysheet-loading-content"> 
+        <div class="luckysheet-loading-content">
             <div class="${config.imageClass} luckysheet-loading-image">
                 ${imageHtml}
             </div>
             <div class="${config.textClass} luckysheet-loading-text">
             <span>${config.text}</span>
-            </div>    
+            </div>
         </div>`;
     const loading = document.createElement("div");
     loading.id = id;
@@ -1472,6 +1479,7 @@ function customCellRightClickConfig() {
         chart: true, // chart generation
         image: true, // insert picture
         link: true, // insert link
+        select: true, // insert select
         data: true, // data verification
         cellFormat: true, // Set cell format
     };

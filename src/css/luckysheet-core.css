@@ -212,7 +212,7 @@
     transition: all 0.2s;
 }
 
-/* 
+/*
 .luckysheet-wa-editor>div.luckysheetfulltoolbar {
     display: inline-block;
     height: 34px;
@@ -3023,7 +3023,7 @@ fieldset[disabled] .btn-danger.focus {
 #luckysheet-sheet-list .luckysheet-cols-menuitem .luckysheet-cols-menuitem-content {
     padding-left: 5px;
 }
-/* 
+/*
 #luckysheet-sheet-list .luckysheet-cols-menuitem .luckysheet-cols-menuitem-content {
     max-width: 420px;
     min-width: 190px;
@@ -3074,11 +3074,11 @@ fieldset[disabled] .btn-danger.focus {
 
 #luckysheet-rich-text-editor {
     -webkit-user-modify: read-write;
-    /*    background-color: rgb(255, 255, 255); 
-    font-size: 13px; 
-    color: rgb(0, 0, 0); 
-    font-weight: 400; 
-    font-family: Arial; 
+    /*    background-color: rgb(255, 255, 255);
+    font-size: 13px;
+    color: rgb(0, 0, 0);
+    font-weight: 400;
+    font-family: Arial;
     font-style: normal;*/
 }
 
@@ -5055,7 +5055,7 @@ fieldset[disabled] .btn-danger.focus {
 
 .luckysheetpopover {
     position: absolute;
-    /*    left: 50%; 
+    /*    left: 50%;
     top:20px; */
     background: rgba(0, 0, 0, 0.65);
     color: #fff;
@@ -7254,3 +7254,46 @@ fieldset[disabled] .btn-danger.focus {
     cursor: default;
     opacity: 0.4;
 }
+
+/* 插入下拉列表 */
+#luckysheet-insertSelect-dialog {
+    user-select: none;
+}
+#luckysheet-insertSelect-dialog .luckysheet-modal-dialog-content #select-options-form{
+    max-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#luckysheet-insertSelect-dialog #local-data-wrap #type-wrap {
+    padding-bottom: 15px;
+}
+
+#luckysheet-insertSelect-dialog .move-icon {
+    width: 24px;
+    height: 38px;
+    float: left;
+    font-size: 20px;
+    padding-top: 9px;
+    cursor: grab;
+}
+
+#luckysheet-insertSelect-dialog .delete-icon {
+    width: 24px;
+    height: 38px;
+    float: left;
+    font-size: 24px;
+    padding-top: 9px;
+    cursor: pointer;
+}
+
+#luckysheet-insertSelect-dialog #add-btn-wrap {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#luckysheet-insertSelect-dialog #add-btn-wrap .add-icon {
+    font-size: 18px;
+}
+

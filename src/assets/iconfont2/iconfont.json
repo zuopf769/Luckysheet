@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "33494162",
+      "name": "drag_indicator",
+      "font_class": "-drag",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "887799",
       "name": "菜单 (1)",
       "font_class": "-menu",
