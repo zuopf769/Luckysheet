@@ -226,26 +226,26 @@ const dataVerificationCtrl = {
                             </div>
                         </div>`;
 
-        $("body").append(replaceHtml(modelHTML, { 
-            "id": "luckysheet-dataVerification-dialog", 
-            "addclass": "luckysheet-dataVerification-dialog", 
-            "title": toolbarText.dataVerification, 
-            "content": content, 
+        $("body").append(replaceHtml(modelHTML, {
+            "id": "luckysheet-dataVerification-dialog",
+            "addclass": "luckysheet-dataVerification-dialog",
+            "title": toolbarText.dataVerification,
+            "content": content,
             "botton":  `<button id="luckysheet-dataVerification-dialog-confirm" class="btn btn-primary">${buttonText.confirm}</button>
                         <button id="luckysheet-dataVerification-dialog-delete" class="btn btn-default">${dvText.deleteVerification}</button>
-                        <button class="btn btn-default luckysheet-model-close-btn">${buttonText.cancel}</button>`, 
-            "style": "z-index:100003" 
+                        <button class="btn btn-default luckysheet-model-close-btn">${buttonText.cancel}</button>`,
+            "style": "z-index:100003"
         }));
-        let $t = $("#luckysheet-dataVerification-dialog").find(".luckysheet-modal-dialog-content").css("min-width", 350).end(), 
-            myh = $t.outerHeight(), 
+        let $t = $("#luckysheet-dataVerification-dialog").find(".luckysheet-modal-dialog-content").css("min-width", 350).end(),
+            myh = $t.outerHeight(),
             myw = $t.outerWidth();
-        let winw = $(window).width(), 
+        let winw = $(window).width(),
             winh = $(window).height();
-        let scrollLeft = $(document).scrollLeft(), 
+        let scrollLeft = $(document).scrollLeft(),
             scrollTop = $(document).scrollTop();
-        $("#luckysheet-dataVerification-dialog").css({ 
-            "left": (winw + scrollLeft - myw) / 2, 
-            "top": (winh + scrollTop - myh) / 3 
+        $("#luckysheet-dataVerification-dialog").css({
+            "left": (winw + scrollLeft - myw) / 2,
+            "top": (winh + scrollTop - myh) / 3
         }).show();
 
         _this.dataAllocation();
@@ -253,7 +253,7 @@ const dataVerificationCtrl = {
     init: function(){
         let _this = this;
 
-        const dvText = locale().dataVerification; 
+        const dvText = locale().dataVerification;
 
         //单元格数据验证 类型是 下拉列表
         $(document).off("click.dropdownBtn").on("click.dropdownBtn", "#luckysheet-dataVerification-dropdown-btn", function(e) {
@@ -286,7 +286,7 @@ const dataVerificationCtrl = {
             $("#luckysheet-dataVerification-dialog").hide();
 
             let dataSource = "0";
-            let txt = $(this).siblings("input").val().trim(); 
+            let txt = $(this).siblings("input").val().trim();
 
             _this.rangeDialog(dataSource, txt);
 
@@ -305,35 +305,35 @@ const dataVerificationCtrl = {
                     let r1 = range[s].row[0], r2 = range[s].row[1];
                     let c1 = range[s].column[0], c2 = range[s].column[1];
 
-                    let row = Store.visibledatarow[r2], 
+                    let row = Store.visibledatarow[r2],
                         row_pre = r1 - 1 == -1 ? 0 : Store.visibledatarow[r1 - 1];
-                    let col = Store.visibledatacolumn[c2], 
+                    let col = Store.visibledatacolumn[c2],
                         col_pre = c1 - 1 == -1 ? 0 : Store.visibledatacolumn[c1 - 1];
 
-                    _this.selectRange.push({ 
-                        "left": col_pre, 
-                        "width": col - col_pre - 1, 
-                        "top": row_pre, 
-                        "height": row - row_pre - 1, 
-                        "left_move": col_pre, 
-                        "width_move": col - col_pre - 1, 
-                        "top_move": row_pre, 
-                        "height_move": row - row_pre - 1, 
-                        "row": [r1, r2], 
-                        "column": [c1, c2], 
-                        "row_focus": r1, 
-                        "column_focus": c1 
+                    _this.selectRange.push({
+                        "left": col_pre,
+                        "width": col - col_pre - 1,
+                        "top": row_pre,
+                        "height": row - row_pre - 1,
+                        "left_move": col_pre,
+                        "width_move": col - col_pre - 1,
+                        "top_move": row_pre,
+                        "height_move": row - row_pre - 1,
+                        "row": [r1, r2],
+                        "column": [c1, c2],
+                        "row_focus": r1,
+                        "column_focus": c1
                     });
                 }
             }
-            
+
             selectionCopyShow(_this.selectRange);
-        }); 
+        });
         $(document).off("click.dvRange2").on("click.dvRange2", "#luckysheet-dataVerification-dialog .show-box-item-dropdown .range .fa-table", function(e) {
             $("#luckysheet-dataVerification-dialog").hide();
 
             let dataSource = "1";
-            let txt = $(this).siblings("input").val().trim(); 
+            let txt = $(this).siblings("input").val().trim();
 
             _this.rangeDialog(dataSource, txt);
 
@@ -352,28 +352,28 @@ const dataVerificationCtrl = {
                     let r1 = range[s].row[0], r2 = range[s].row[1];
                     let c1 = range[s].column[0], c2 = range[s].column[1];
 
-                    let row = Store.visibledatarow[r2], 
+                    let row = Store.visibledatarow[r2],
                         row_pre = r1 - 1 == -1 ? 0 : Store.visibledatarow[r1 - 1];
-                    let col = Store.visibledatacolumn[c2], 
+                    let col = Store.visibledatacolumn[c2],
                         col_pre = c1 - 1 == -1 ? 0 : Store.visibledatacolumn[c1 - 1];
 
-                    _this.selectRange.push({ 
-                        "left": col_pre, 
-                        "width": col - col_pre - 1, 
-                        "top": row_pre, 
-                        "height": row - row_pre - 1, 
-                        "left_move": col_pre, 
-                        "width_move": col - col_pre - 1, 
-                        "top_move": row_pre, 
-                        "height_move": row - row_pre - 1, 
-                        "row": [r1, r2], 
-                        "column": [c1, c2], 
-                        "row_focus": r1, 
-                        "column_focus": c1 
+                    _this.selectRange.push({
+                        "left": col_pre,
+                        "width": col - col_pre - 1,
+                        "top": row_pre,
+                        "height": row - row_pre - 1,
+                        "left_move": col_pre,
+                        "width_move": col - col_pre - 1,
+                        "top_move": row_pre,
+                        "height_move": row - row_pre - 1,
+                        "row": [r1, r2],
+                        "column": [c1, c2],
+                        "row_focus": r1,
+                        "column_focus": c1
                     });
                 }
             }
-            
+
             selectionCopyShow(_this.selectRange);
         });
         $(document).off("click.dvRangeConfirm").on("click.dvRangeConfirm", "#luckysheet-dataVerificationRange-dialog-confirm", function(e) {
@@ -391,7 +391,7 @@ const dataVerificationCtrl = {
             else if(dataSource == '1'){
                 $("#luckysheet-dataVerification-dialog .show-box-item-dropdown .range input").val(txt);
             }
-            
+
             $("#luckysheet-dataVerificationRange-dialog").hide();
             $("#luckysheet-modal-dialog-mask").show();
             $("#luckysheet-dataVerification-dialog").show();
@@ -448,7 +448,7 @@ const dataVerificationCtrl = {
                 }
 
                 $("#luckysheet-dataVerification-dialog .show-box-item-dropdown .data-verification-value1").val(value1);
-                
+
                 $('#luckysheet-dataVerification-dialog #data-verification-multi').prop('checked', item.type2 ? true : false);
             }
             else if(value == 'checkbox'){
@@ -480,7 +480,7 @@ const dataVerificationCtrl = {
                 }
 
                 $("#luckysheet-dataVerification-dialog #data-verification-number-select").val(type2);
-            
+
                 if(type2 == 'bw' || type2 == 'nb'){
                     $("#luckysheet-dataVerification-dialog .show-box-item-number .input1").show();
                 }
@@ -496,12 +496,12 @@ const dataVerificationCtrl = {
 
                 let type2 = "include";
                 let value1 = "";
-                
+
                 if(value == item.type){
                     type2 = item.type2;
                     value1 = item.value1;
                 }
-                
+
                 $("#luckysheet-dataVerification-dialog #data-verification-text-select").val(type2);
                 $("#luckysheet-dataVerification-dialog .show-box-item-text .data-verification-value1").val(value1);
             }
@@ -520,7 +520,7 @@ const dataVerificationCtrl = {
                 }
 
                 $("#luckysheet-dataVerification-dialog #data-verification-textLength-select").val(type2);
-            
+
                 if(type2 == 'bw' || type2 == 'nb'){
                     $("#luckysheet-dataVerification-dialog .show-box-item-textLength .input1").show();
                 }
@@ -621,6 +621,7 @@ const dataVerificationCtrl = {
 
         //确认按钮
         $(document).off("click.dvSaveConfirm").on("click.dvSaveConfirm", "#luckysheet-dataVerification-dialog-confirm", function(e) {
+            debugger;
             let rangeTxt = $("#luckysheet-dataVerification-dialog #data-verification-range input").val().trim();
             let range = _this.getRangeByTxt(rangeTxt);
 
@@ -656,7 +657,7 @@ const dataVerificationCtrl = {
 
             if(type == 'dropdown'){
                 value1 = $("#luckysheet-dataVerification-dialog .show-box-item-dropdown .data-verification-value1").val().trim();
-            
+
                 if(value1.length == 0){
                     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo1);
                     return;
@@ -666,7 +667,7 @@ const dataVerificationCtrl = {
             else if(type == 'checkbox'){
                 value1 = $("#luckysheet-dataVerification-dialog .show-box-item-checkbox .data-verification-value1").val().trim();
                 value2 = $("#luckysheet-dataVerification-dialog .show-box-item-checkbox .data-verification-value2").val().trim();
-            
+
                 if(value1.length == 0 || value2.length == 0){
                     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo2);
                     return;
@@ -675,7 +676,7 @@ const dataVerificationCtrl = {
             else if(type == 'number' || type == 'number_integer' || type == 'number_decimal'){
                 type2 = $("#luckysheet-dataVerification-dialog #data-verification-number-select").val();
                 value1 = $("#luckysheet-dataVerification-dialog .show-box-item-number .input:visible .data-verification-value1").val().trim();
-                
+
                 if(!isRealNum(value1)){
                     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo3);
                     return;
@@ -683,7 +684,7 @@ const dataVerificationCtrl = {
 
                 if(type2 == 'bw' || type2 == 'nb'){
                     value2 = $("#luckysheet-dataVerification-dialog .show-box-item-number .input:visible .data-verification-value2").val().trim();
-                
+
                     if(!isRealNum(value2)){
                         tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo3);
                         return;
@@ -698,7 +699,7 @@ const dataVerificationCtrl = {
             else if(type == 'text_content'){
                 type2 = $("#luckysheet-dataVerification-dialog #data-verification-text-select").val();
                 value1 = $("#luckysheet-dataVerification-dialog .show-box-item-text .data-verification-value1").val().trim();
-            
+
                 if(value1.length == 0){
                     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo5);
                     return;
@@ -707,7 +708,7 @@ const dataVerificationCtrl = {
             else if(type == 'text_length'){
                 type2 = $("#luckysheet-dataVerification-dialog #data-verification-textLength-select").val();
                 value1 = $("#luckysheet-dataVerification-dialog .show-box-item-textLength .input:visible .data-verification-value1").val().trim();
-                
+
                 if(!isRealNum(value1)){
                     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo3);
                     return;
@@ -720,7 +721,7 @@ const dataVerificationCtrl = {
 
                 if(type2 == 'bw' || type2 == 'nb'){
                     value2 = $("#luckysheet-dataVerification-dialog .show-box-item-textLength .input:visible .data-verification-value2").val().trim();
-                
+
                     if(!isRealNum(value2)){
                         tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo3);
                         return;
@@ -739,7 +740,7 @@ const dataVerificationCtrl = {
             else if(type == 'date'){
                 type2 = $("#luckysheet-dataVerification-dialog #data-verification-date-select").val();
                 value1 = $("#luckysheet-dataVerification-dialog .show-box-item-date .input:visible .data-verification-value1").val().trim();
-                
+
                 if(!isdatetime(value1)){
                     tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo6);
                     return;
@@ -747,7 +748,7 @@ const dataVerificationCtrl = {
 
                 if(type2 == 'bw' || type2 == 'nb'){
                     value2 = $("#luckysheet-dataVerification-dialog .show-box-item-date .input:visible .data-verification-value2").val().trim();
-                
+
                     if(!isdatetime(value2)){
                         tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.tooltipInfo6);
                         return;
@@ -774,16 +775,16 @@ const dataVerificationCtrl = {
 
             let item = {
                 type: type,
-                type2: type2,  
-                value1: value1,  
-                value2: value2, 
-                checked: false, 
-                remote: remote, 
-                prohibitInput: prohibitInput,  
-                hintShow: hintShow, 
+                type2: type2,
+                value1: value1,
+                value2: value2,
+                checked: false,
+                remote: remote,
+                prohibitInput: prohibitInput,
+                hintShow: hintShow,
                 hintText: hintText,
             }
-           
+
             let historyDataVerification = $.extend(true, {}, _this.dataVerification);
             let currentDataVerification = $.extend(true, {}, _this.dataVerification);
 
@@ -803,7 +804,7 @@ const dataVerificationCtrl = {
             else{
                 _this.ref(historyDataVerification, currentDataVerification, Store.currentSheetIndex);
             }
-            
+
             $("#luckysheet-modal-dialog-mask").hide();
             $("#luckysheet-dataVerification-dialog").hide();
         });
@@ -817,7 +818,7 @@ const dataVerificationCtrl = {
                 tooltip.info('<i class="fa fa-exclamation-triangle"></i>', dvText.selectCellRange2);
                 return;
             }
-            
+
             let historyDataVerification = $.extend(true, {}, _this.dataVerification);
             let currentDataVerification = $.extend(true, {}, _this.dataVerification);
 
@@ -833,7 +834,7 @@ const dataVerificationCtrl = {
             }
 
             _this.ref(historyDataVerification, currentDataVerification, Store.currentSheetIndex);
-            
+
             $("#luckysheet-modal-dialog-mask").hide();
             $("#luckysheet-dataVerification-dialog").hide();
         });
@@ -859,7 +860,7 @@ const dataVerificationCtrl = {
         //focus单元格
         let rowIndex = range.row_focus || range.row[0];
         let colIndex = range.column_focus || range.column[0];
-        let dataVerification = $.extend(true, {}, _this.dataVerification); 
+        let dataVerification = $.extend(true, {}, _this.dataVerification);
         let item = dataVerification[rowIndex + '_' + colIndex];
 
         if(item == null){
@@ -867,7 +868,7 @@ const dataVerificationCtrl = {
         }
 
         _this.curItem = item;
-        
+
         //验证条件
         $("#luckysheet-dataVerification-dialog #data-verification-type-select").val(item.type);
         $("#luckysheet-dataVerification-dialog .show-box .show-box-item").hide();
@@ -886,7 +887,7 @@ const dataVerificationCtrl = {
             $("#luckysheet-dataVerification-dialog .show-box-item-number").show();
             $("#luckysheet-dataVerification-dialog #data-verification-number-select").val(item.type2);
             $("#luckysheet-dataVerification-dialog .show-box-item-number .input").hide();
-            
+
             if(item.type2 == 'bw' || item.type2 == 'nb'){
                 $("#luckysheet-dataVerification-dialog .show-box-item-number .input1").show();
             }
@@ -945,14 +946,14 @@ const dataVerificationCtrl = {
 
         //选中单元格时显示提示语
         $("#luckysheet-dataVerification-dialog #data-verification-hint-show").prop("checked", item.hintShow);
-        
+
         if(item.hintShow){
             $("#luckysheet-dataVerification-dialog .data-verification-hint-text").show();
         }
         else{
             $("#luckysheet-dataVerification-dialog .data-verification-hint-text").hide();
         }
-        
+
         $("#luckysheet-dataVerification-dialog .data-verification-hint-text input").val(item.hintText);
     },
     rangeDialog: function(dataSource, txt){
@@ -965,26 +966,26 @@ const dataVerificationCtrl = {
         $("#luckysheet-modal-dialog-mask").hide();
         $("#luckysheet-dataVerificationRange-dialog").remove();
 
-        $("body").append(replaceHtml(modelHTML, { 
-            "id": "luckysheet-dataVerificationRange-dialog", 
-            "addclass": "luckysheet-dataVerificationRange-dialog", 
-            "title": dvText.selectCellRange, 
-            "content": `<input readonly="readonly" placeholder="${dvText.selectCellRange2}" value="${txt}"/>`, 
+        $("body").append(replaceHtml(modelHTML, {
+            "id": "luckysheet-dataVerificationRange-dialog",
+            "addclass": "luckysheet-dataVerificationRange-dialog",
+            "title": dvText.selectCellRange,
+            "content": `<input readonly="readonly" placeholder="${dvText.selectCellRange2}" value="${txt}"/>`,
             "botton":  `<button id="luckysheet-dataVerificationRange-dialog-confirm" class="btn btn-primary" data-source="${dataSource}">${buttonText.confirm}</button>
-                        <button id="luckysheet-dataVerificationRange-dialog-close" class="btn btn-default">${buttonText.close}</button>`, 
-            "style": "z-index:100003" 
+                        <button id="luckysheet-dataVerificationRange-dialog-close" class="btn btn-default">${buttonText.close}</button>`,
+            "style": "z-index:100003"
         }));
         let $t = $("#luckysheet-dataVerificationRange-dialog")
                 .find(".luckysheet-modal-dialog-content")
                 .css("min-width", 300)
-                .end(), 
-            myh = $t.outerHeight(), 
+                .end(),
+            myh = $t.outerHeight(),
             myw = $t.outerWidth();
         let winw = $(window).width(), winh = $(window).height();
         let scrollLeft = $(document).scrollLeft(), scrollTop = $(document).scrollTop();
-        $("#luckysheet-dataVerificationRange-dialog").css({ 
-            "left": (winw + scrollLeft - myw) / 2, 
-            "top": (winh + scrollTop - myh) / 3 
+        $("#luckysheet-dataVerificationRange-dialog").css({
+            "left": (winw + scrollLeft - myw) / 2,
+            "top": (winh + scrollTop - myh) / 3
         }).show();
     },
     getTxtByRange: function(range){
@@ -994,7 +995,7 @@ const dataVerificationCtrl = {
             for(let s = 0; s < range.length; s++){
                 let r1 = range[s].row[0], r2 = range[s].row[1];
                 let c1 = range[s].column[0], c2 = range[s].column[1];
-                
+
                 txt.push(getRangetxt(Store.currentSheetIndex, { "row": [r1, r2], "column": [c1, c2] }, Store.currentSheetIndex));
             }
 
@@ -1012,7 +1013,7 @@ const dataVerificationCtrl = {
                 }
                 else{
                     range = [];
-                    break;    
+                    break;
                 }
             }
         }
@@ -1039,12 +1040,11 @@ const dataVerificationCtrl = {
             row_pre = r == 0 ? 0 : Store.visibledatarow[r - 1];
         let col = Store.visibledatacolumn[c],
             col_pre = c == 0 ? 0 : Store.visibledatacolumn[c - 1];
-
         let margeset = menuButton.mergeborer(Store.flowdata, r, c);
         if(!!margeset){
             row = margeset.row[1];
             row_pre = margeset.row[0];
-            
+
             col = margeset.column[1];
             col_pre = margeset.column[0];
         }
@@ -1068,7 +1068,7 @@ const dataVerificationCtrl = {
 
             if($("#luckysheet-dataVerification-dropdown-List").is(":visible")){
                 let dataIndex = $("#luckysheet-dataVerification-dropdown-List").prop("data-index");
-                
+
                 if(dataIndex != (r + '_' + c)){
                     $("#luckysheet-dataVerification-dropdown-List").hide();
                 }
@@ -1098,7 +1098,7 @@ const dataVerificationCtrl = {
 
             return;
         }
-        
+
         //数据验证未通过
         let cellValue = getcellvalue(r, c, null);
 
@@ -1151,7 +1151,7 @@ const dataVerificationCtrl = {
                 }
                 else if(item.type == 'text_length'){
                     hintText += 'please enter text with length ' + _this.optionLabel_en[item.type2] + ' ' + item.value1;
-                    
+
                     if(item.type2 == 'bw' || item.type2 == 'nb'){
                         hintText += ' and ' + item.value2;
                     }
@@ -1188,7 +1188,7 @@ const dataVerificationCtrl = {
                 }
                 else if(item.type == 'text_length'){
                     hintText += '请输入长度' + _this.optionLabel[item.type2] + item.value1;
-                    
+
                     if(item.type2 == 'bw' || item.type2 == 'nb'){
                         hintText += '和' + item.value2 + '之间';
                     }
@@ -1236,7 +1236,7 @@ const dataVerificationCtrl = {
             }
             else if(item.type == 'text_length'){
                 failureText += 'the text you entered is not length ' + _this.optionLabel_en[item.type2] + ' ' + item.value1;
-                
+
                 if(item.type2 == 'bw' || item.type2 == 'nb'){
                     failureText += ' and ' + item.value2;
                 }
@@ -1273,7 +1273,7 @@ const dataVerificationCtrl = {
             }
             else if(item.type == 'text_length'){
                 failureText += '你输入的不是长度' + _this.optionLabel[item.type2] + item.value1;
-                
+
                 if(item.type2 == 'bw' || item.type2 == 'nb'){
                     failureText += '和' + item.value2 + '之间';
                 }
@@ -1332,7 +1332,7 @@ const dataVerificationCtrl = {
             if(!isRealNum(cellValue)){
                 return false;
             }
-            
+
             cellValue = Number(cellValue);
 
             if(type == 'number_integer' && cellValue % 1 !== 0){
@@ -1482,6 +1482,7 @@ const dataVerificationCtrl = {
         return true;
     },
     dropdownListShow: function(){
+        debugger;
         $("#luckysheet-dataVerification-showHintBox").hide();
 
         let _this = this;
@@ -1499,7 +1500,7 @@ const dataVerificationCtrl = {
         if(!!margeset){
             row = margeset.row[1];
             row_pre = margeset.row[0];
-            
+
             col = margeset.column[1];
             col_pre = margeset.column[0];
         }
@@ -1604,10 +1605,10 @@ const dataVerificationCtrl = {
         setcellvalue(r, c, d, value);
 
         _this.refOfCheckbox(
-            historyDataVerification, 
-            currentDataVerification, 
-            Store.currentSheetIndex, 
-            d, 
+            historyDataVerification,
+            currentDataVerification,
+            Store.currentSheetIndex,
+            d,
             { "row": [r, r], "column": [c, c] }
         );
     },
@@ -1622,14 +1623,14 @@ const dataVerificationCtrl = {
             redo["sheetIndex"] = sheetIndex;
             redo["historyDataVerification"] = historyDataVerification;
             redo["currentDataVerification"] = currentDataVerification;
-            Store.jfredo.push(redo); 
+            Store.jfredo.push(redo);
         }
-        
+
         _this.dataVerification = currentDataVerification;
         Store.luckysheetfile[getSheetIndex(sheetIndex)].dataVerification = currentDataVerification;
 
         //共享编辑模式
-        if(server.allowUpdate){ 
+        if(server.allowUpdate){
             server.saveParam("all", sheetIndex, currentDataVerification, { "k": "dataVerification" });
         }
 
@@ -1648,10 +1649,10 @@ const dataVerificationCtrl = {
             redo["sheetIndex"] = sheetIndex;
             redo["historyDataVerification"] = historyDataVerification;
             redo["currentDataVerification"] = currentDataVerification;
-            redo["data"] = Store.flowdata; 
+            redo["data"] = Store.flowdata;
             redo["curData"] = d;
-            redo["range"] = range; 
-            Store.jfredo.push(redo); 
+            redo["range"] = range;
+            Store.jfredo.push(redo);
         }
 
         _this.dataVerification = currentDataVerification;
@@ -1662,7 +1663,7 @@ const dataVerificationCtrl = {
         Store.luckysheetfile[getSheetIndex(sheetIndex)].data = Store.flowdata;
 
         //共享编辑模式
-        if(server.allowUpdate){ 
+        if(server.allowUpdate){
             server.saveParam("all", sheetIndex, currentDataVerification, { "k": "dataVerification" });
             server.historyParam(Store.flowdata, sheetIndex, range);
         }

@@ -1,6 +1,10 @@
 import { replaceHtml } from "../utils/util";
 import { modelHTML } from "./constant";
 import locale from "../locale/locale";
+import Store from '../store';
+import { getSheetIndex } from '../methods/get';
+import server from './server';
+import { luckysheetrefreshgrid } from '../global/refresh';
 
 // 下拉选项
 const option = {label: '', value: ''};
@@ -10,6 +14,7 @@ const selectListCtrl = {
   mode: 'local',// 本地or远程
   type: 'single',// 单选or多选
   options: new Array(3).fill(option), // 下拉选项
+  selectList: null, // 存放最终的配置数据
   createOptionsList: function () {
     let selectOptions = '';
     this.options.forEach((item, index) => {
@@ -46,7 +51,7 @@ const selectListCtrl = {
 
                                 </form>
                                 <div id="add-btn-wrap">
-                                    <span class="add-icon iconfont-luckysheet luckysheet-iconfont-jia"></span>新增选项
+                                    <span class="add-icon iconfont-luckysheet luckysheet-iconfont-jia"></span><span>新增选项</span>
                                 </div>
                             </div>`
 
@@ -134,11 +139,30 @@ const selectListCtrl = {
 
          //确认按钮
         $(document).off("click.confirm").on("click.confirm", "#luckysheet-insertSelect-dialog-confirm", function(e){
-            console.log('xxxxx',e )
+            debugger;
+            let last = Store.luckysheet_select_save[Store.luckysheet_select_save.length - 1];
+            let rowIndex = last.row_focus || last.row[0];
+            let colIndex = last.column_focus || last.column[0];
+
             // 获取表单数据
             var data = form.val('select-options-filter');
             console.log(data)
             _this.saveOptionsData(data);
+
+            let item = {
+                options: _this.options
+            }
+
+            let historySelectList = $.extend(true, {}, _this.selectList);
+            let currentSelectList = $.extend(true, {}, _this.selectList);
+
+            currentSelectList[rowIndex + "_" + colIndex] = item;
+
+            _this.ref(
+                historySelectList,
+                currentSelectList,
+                Store.currentSheetIndex
+            );
 
         })
     })
@@ -158,13 +182,42 @@ const selectListCtrl = {
     var _this = this;
     var len = _this.options.length;
     var obj = {};
-    for (var i = 0; i < len -1; i++) {
+    for (var i = 0; i < len; i++) {
         let op = _this.options[i];
         obj[`label-${i}`] = op.label;
         obj[`value-${i}`] = op.value;
     }
     return obj;
-  }
+  },
+  cellFocus: function(r, c){
+
+  },
+  ref: function(historySelectList, currentSelectList, sheetIndex){
+    let _this = this;
+
+    if (Store.clearjfundo) {
+        Store.jfundo.length  = 0;
+
+        let redo = {};
+        redo["type"] = "updateSelectList";
+        redo["sheetIndex"] = sheetIndex;
+        redo["historySelectList"] = historySelectList;
+        redo["currentSelectList"] = currentSelectList;
+        Store.jfredo.push(redo);
+    }
+    debugger;
+    _this.currentSelectList = currentSelectList;
+    Store.luckysheetfile[getSheetIndex(sheetIndex)].selectList = currentSelectList;
+
+    // 共享编辑模式
+    if(server.allowUpdate){
+        server.saveParam("all", sheetIndex, currentSelectList, { "k": "selectList" });
+    }
+
+    setTimeout(function () {
+        luckysheetrefreshgrid();
+    }, 1);
+},
 };
 
 export default selectListCtrl;
