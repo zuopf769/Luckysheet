@@ -5,6 +5,8 @@ import Store from '../store';
 import { getSheetIndex } from '../methods/get';
 import server from './server';
 import { luckysheetrefreshgrid } from '../global/refresh';
+import editor from '../global/editor';
+import ReferSelect from '../expendPlugins/referSelect/referSelect'
 
 // 下拉选项
 const option = {label: '', value: ''};
@@ -28,8 +30,8 @@ const selectListCtrl = {
                             </div>
                             <span class="delete-icon iconfont-luckysheet luckysheet-iconfont-shanchu" data-idx="${index}"></span>
                         </div>`
-    })
-    $('#luckysheet-insertSelect-dialog #select-options-form').html(selectOptions)
+    });
+    $('#luckysheet-insertSelect-dialog #select-options-form').html(selectOptions);
 
   },
   createDialog: function () {
@@ -109,16 +111,20 @@ const selectListCtrl = {
     _this.createOptionsList()
 
 
-    $('#luckysheet-insertSelect-dialog .select-item-option .delete-icon').off("click.selectDelete").on("click.selectDelete",  function(e) {
-        let idx = $(e.currentTarget).attr('data-idx');
-        console.log('xxx', idx)
-        _this.options.splice(idx, 1);
-        // 重新创建下拉选项并且绑定事件
-        _this.init();
-    })
-
     layui.use(function(){
         var form = layui.form;
+
+        $('#luckysheet-insertSelect-dialog .select-item-option .delete-icon').off("click.selectDelete").on("click.selectDelete",  function(e) {
+            // 先收集表单数据，再删除，才能保存已经填写过的数据
+            var data = form.val('select-options-filter');
+            _this.saveOptionsData(data);
+            // 删除
+            let idx = $(e.currentTarget).attr('data-idx');
+            console.log('xxx', idx)
+            _this.options.splice(idx, 1);
+            // 重新创建下拉选项并且绑定事件
+            _this.init();
+        })
 
         $(document).off("click.selectAdd").on("click.selectAdd", "#luckysheet-insertSelect-dialog #add-btn-wrap", function(e){
             var data = form.val('select-options-filter');
@@ -139,7 +145,6 @@ const selectListCtrl = {
 
          //确认按钮
         $(document).off("click.confirm").on("click.confirm", "#luckysheet-insertSelect-dialog-confirm", function(e){
-            debugger;
             let last = Store.luckysheet_select_save[Store.luckysheet_select_save.length - 1];
             let rowIndex = last.row_focus || last.row[0];
             let colIndex = last.column_focus || last.column[0];
@@ -158,11 +163,33 @@ const selectListCtrl = {
 
             currentSelectList[rowIndex + "_" + colIndex] = item;
 
+            // cellData加一个特殊的自定义字段来标识是下拉框
+            let d = editor.deepCopyFlowData(Store.flowdata);
+            let cell = d[rowIndex][colIndex];
+            if(cell == null){
+                cell = {};
+            }
+            cell.ct =  {
+                "fa": "General",
+                "t": "g"
+            },
+            cell.v = cell.m = '3';
+            cell.customKey = {
+                t: 'r'
+            }
+
+            d[rowIndex][colIndex] = cell;
+
             _this.ref(
                 historySelectList,
                 currentSelectList,
-                Store.currentSheetIndex
+                Store.currentSheetIndex,
+                d,
+                [{ row: [rowIndex, rowIndex], column: [colIndex, colIndex] }]
             );
+
+            $("#luckysheet-modal-dialog-mask").hide();
+            $("#luckysheet-insertSelect-dialog").hide();
 
         })
     })
@@ -190,9 +217,20 @@ const selectListCtrl = {
     return obj;
   },
   cellFocus: function(r, c){
+    debugger;
+    let _this = this;
+
+    if(_this.selectList == null || _this.selectList[r + '_' + c] == null){
+        return;
+    }
+
+    let item = _this.selectList[r + '_' + c];
+
+    const rs = new ReferSelect('#luckysheet-input-box', {});
+
 
   },
-  ref: function(historySelectList, currentSelectList, sheetIndex){
+  ref: function(historySelectList, currentSelectList, sheetIndex, d, range){
     let _this = this;
 
     if (Store.clearjfundo) {
@@ -203,11 +241,17 @@ const selectListCtrl = {
         redo["sheetIndex"] = sheetIndex;
         redo["historySelectList"] = historySelectList;
         redo["currentSelectList"] = currentSelectList;
+        redo["data"] = Store.flowdata;
+        redo["curData"] = d;
+        redo["range"] = range;
         Store.jfredo.push(redo);
     }
-    debugger;
-    _this.currentSelectList = currentSelectList;
+    _this.selectList = currentSelectList;
     Store.luckysheetfile[getSheetIndex(sheetIndex)].selectList = currentSelectList;
+
+    Store.flowdata = d;
+    editor.webWorkerFlowDataCache(Store.flowdata);//worker存数据
+    Store.luckysheetfile[getSheetIndex(sheetIndex)].data = Store.flowdata;
 
     // 共享编辑模式
     if(server.allowUpdate){

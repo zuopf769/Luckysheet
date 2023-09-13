@@ -28,6 +28,7 @@ const fitFormat = (formatStr) => {
 
 const cellDatePickerCtrl = {
     cellFocus: function (r, c, cell) {
+        debugger;
         let row = Store.visibledatarow[r],
             row_pre = r == 0 ? 0 : Store.visibledatarow[r - 1];
         let col = Store.visibledatacolumn[c],

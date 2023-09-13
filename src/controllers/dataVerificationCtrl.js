@@ -621,7 +621,6 @@ const dataVerificationCtrl = {
 
         //确认按钮
         $(document).off("click.dvSaveConfirm").on("click.dvSaveConfirm", "#luckysheet-dataVerification-dialog-confirm", function(e) {
-            debugger;
             let rangeTxt = $("#luckysheet-dataVerification-dialog #data-verification-range input").val().trim();
             let range = _this.getRangeByTxt(rangeTxt);
 

@@ -442,6 +442,12 @@ export default function luckysheetHandler() {
                 return;
             }
 
+            //参照下拉 单元格聚焦
+            if(selectListCtrl.selectList && selectListCtrl.selectList[row_index + "_" + col_index] && event.which != "3") {
+                // selectListCtrl.cellFocus(row_index, col_index);
+                // return;
+            }
+
             Store.luckysheet_scroll_status = true;
 
             //公式相关

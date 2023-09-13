@@ -74,25 +74,25 @@ const hyperlinkCtrl = {
                             </div>
                         </div>`;
 
-        $("body").append(replaceHtml(modelHTML, { 
-            "id": "luckysheet-insertLink-dialog", 
-            "addclass": "luckysheet-insertLink-dialog", 
-            "title": toolbarText.insertLink, 
-            "content": content, 
+        $("body").append(replaceHtml(modelHTML, {
+            "id": "luckysheet-insertLink-dialog",
+            "addclass": "luckysheet-insertLink-dialog",
+            "title": toolbarText.insertLink,
+            "content": content,
             "botton":  `<button id="luckysheet-insertLink-dialog-confirm" class="btn btn-primary">${buttonText.confirm}</button>
-                        <button class="btn btn-default luckysheet-model-close-btn">${buttonText.cancel}</button>`, 
-            "style": "z-index:100003" 
+                        <button class="btn btn-default luckysheet-model-close-btn">${buttonText.cancel}</button>`,
+            "style": "z-index:100003"
         }));
-        let $t = $("#luckysheet-insertLink-dialog").find(".luckysheet-modal-dialog-content").css("min-width", 350).end(), 
-            myh = $t.outerHeight(), 
+        let $t = $("#luckysheet-insertLink-dialog").find(".luckysheet-modal-dialog-content").css("min-width", 350).end(),
+            myh = $t.outerHeight(),
             myw = $t.outerWidth();
-        let winw = $(window).width(), 
+        let winw = $(window).width(),
             winh = $(window).height();
-        let scrollLeft = $(document).scrollLeft(), 
+        let scrollLeft = $(document).scrollLeft(),
             scrollTop = $(document).scrollTop();
-        $("#luckysheet-insertLink-dialog").css({ 
-            "left": (winw + scrollLeft - myw) / 2, 
-            "top": (winh + scrollTop - myh) / 3 
+        $("#luckysheet-insertLink-dialog").css({
+            "left": (winw + scrollLeft - myw) / 2,
+            "top": (winh + scrollTop - myh) / 3
         }).show();
 
         _this.dataAllocation();
@@ -174,10 +174,10 @@ const hyperlinkCtrl = {
             d[rowIndex][colIndex] = cell;
 
             _this.ref(
-                historyHyperlink, 
-                currentHyperlink, 
-                Store.currentSheetIndex, 
-                d, 
+                historyHyperlink,
+                currentHyperlink,
+                Store.currentSheetIndex,
+                d,
                 [{ row: [rowIndex, rowIndex], column: [colIndex, colIndex] }]
             );
 
@@ -306,15 +306,15 @@ const hyperlinkCtrl = {
             linkTooltip = item.linkAddress;
         }
 
-        let row = Store.visibledatarow[row_index], 
+        let row = Store.visibledatarow[row_index],
             row_pre = row_index - 1 == -1 ? 0 : Store.visibledatarow[row_index - 1];
-        let col = Store.visibledatacolumn[col_index], 
+        let col = Store.visibledatacolumn[col_index],
             col_pre = col_index - 1 == -1 ? 0 : Store.visibledatacolumn[col_index - 1];
 
         if(!!margeset){
             row = margeset.row[1];
             row_pre = margeset.row[0];
-            
+
             col = margeset.column[1];
             col_pre = margeset.column[0];
         }
@@ -337,10 +337,10 @@ const hyperlinkCtrl = {
             redo["sheetIndex"] = sheetIndex;
             redo["historyHyperlink"] = historyHyperlink;
             redo["currentHyperlink"] = currentHyperlink;
-            redo["data"] = Store.flowdata; 
+            redo["data"] = Store.flowdata;
             redo["curData"] = d;
-            redo["range"] = range; 
-            Store.jfredo.push(redo); 
+            redo["range"] = range;
+            Store.jfredo.push(redo);
         }
 
         _this.hyperlink = currentHyperlink;
@@ -351,7 +351,7 @@ const hyperlinkCtrl = {
         Store.luckysheetfile[getSheetIndex(sheetIndex)].data = Store.flowdata;
 
         //共享编辑模式
-        if(server.allowUpdate){ 
+        if(server.allowUpdate){
             server.saveParam("all", sheetIndex, currentHyperlink, { "k": "hyperlink" });
             server.historyParam(Store.flowdata, sheetIndex, range[0]);
         }
