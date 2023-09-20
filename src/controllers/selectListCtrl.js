@@ -6,7 +6,8 @@ import { getSheetIndex } from '../methods/get';
 import server from './server';
 import { luckysheetrefreshgrid } from '../global/refresh';
 import editor from '../global/editor';
-import ReferSelect from '../expendPlugins/referSelect/referSelect'
+import ReferSelect from '../expendPlugins/referSelect/referSelect';
+import { setCellValue, setCellFormat } from '../global/api';
 
 // 下拉选项
 const option = {label: '', value: ''};
@@ -155,6 +156,8 @@ const selectListCtrl = {
             _this.saveOptionsData(data);
 
             let item = {
+                mode: _this.mode,
+                type: _this.type,
                 options: _this.options
             }
 
@@ -173,7 +176,7 @@ const selectListCtrl = {
                 "fa": "General",
                 "t": "g"
             },
-            cell.v = cell.m = '3';
+            cell.v = cell.m = '';
             cell.customKey = {
                 t: 'r'
             }
@@ -216,8 +219,7 @@ const selectListCtrl = {
     }
     return obj;
   },
-  cellFocus: function(r, c){
-    debugger;
+  cellFocus: function(r, c, cell){
     let _this = this;
 
     if(_this.selectList == null || _this.selectList[r + '_' + c] == null){
@@ -226,8 +228,17 @@ const selectListCtrl = {
 
     let item = _this.selectList[r + '_' + c];
 
-    const rs = new ReferSelect('#luckysheet-input-box', {});
-
+    const rs = new ReferSelect('#luckysheet-input-box', {
+        ..._this.selectList[`${r}_${c}`],
+        onChange: function(selectedOpts) {
+            debugger;
+            console.log('selectedOpts', selectedOpts)
+            let currentVal = selectedOpts.value;
+            $("#luckysheet-rich-text-editor").html(currentVal);
+            setCellValue(r, c, currentVal, { isRefresh: false })
+            setCellFormat(r, c, 'ct', cell.ct)
+        }
+    });
 
   },
   ref: function(historySelectList, currentSelectList, sheetIndex, d, range){

@@ -1,6 +1,21 @@
-#select-wrapper {
+.refer-select-wrapper {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 9999999;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    box-sizing: border-box;
+}
+
+.refer-select-wrapper .refer-select-item {
+    width: 100%;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.refer-select-wrapper .refer-select-item:hover {
+    background-color: #e1e1e1;
 }

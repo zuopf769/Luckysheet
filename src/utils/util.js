@@ -916,5 +916,5 @@ export {
     openSelfModel,
     createProxy,
     arrayRemoveItem,
-    camel2split,
+    camel2split
 };

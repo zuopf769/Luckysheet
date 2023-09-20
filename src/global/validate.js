@@ -57,7 +57,7 @@ function valueIsError(value) {
 //是否有中文
 function hasChinaword(s) {
     let patrn = /[\u4E00-\u9FA5]|[\uFE30-\uFFA0]/gi;
-    
+
     if (!patrn.exec(s)) {
         return false;
     }
@@ -206,7 +206,7 @@ function hasPartMC(cfg, r1, r2, c1, c2) {
 function checkWordByteLength(value) {
     return Math.ceil(value.charCodeAt().toString(2).length / 8);
  }
- 
+
 
 export {
     isRealNull,

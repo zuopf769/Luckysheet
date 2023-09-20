@@ -86,6 +86,7 @@ const cellDatePickerCtrl = {
             defaultDate,
             onClose() {
                 setTimeout(() => {
+                    debugger;
                     fp.destroy()
                 }, 0);
             },
@@ -101,6 +102,7 @@ const cellDatePickerCtrl = {
             onChange: function (selectedDates, dateStr) {
                 let currentVal = datenum_local(new Date(selectedDates))
                 $("#luckysheet-rich-text-editor").html(dateStr);
+                debugger;
                 setCellValue(r, c, currentVal, { isRefresh: false })
                 setCellFormat(r, c, 'ct', cell.ct)
                 if (!enableTime) {
