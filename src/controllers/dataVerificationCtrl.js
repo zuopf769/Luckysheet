@@ -1481,7 +1481,6 @@ const dataVerificationCtrl = {
         return true;
     },
     dropdownListShow: function(){
-        debugger;
         $("#luckysheet-dataVerification-showHintBox").hide();
 
         let _this = this;

@@ -28,7 +28,6 @@ const fitFormat = (formatStr) => {
 
 const cellDatePickerCtrl = {
     cellFocus: function (r, c, cell) {
-        debugger;
         let row = Store.visibledatarow[r],
             row_pre = r == 0 ? 0 : Store.visibledatarow[r - 1];
         let col = Store.visibledatacolumn[c],
@@ -86,7 +85,6 @@ const cellDatePickerCtrl = {
             defaultDate,
             onClose() {
                 setTimeout(() => {
-                    debugger;
                     fp.destroy()
                 }, 0);
             },
@@ -102,7 +100,6 @@ const cellDatePickerCtrl = {
             onChange: function (selectedDates, dateStr) {
                 let currentVal = datenum_local(new Date(selectedDates))
                 $("#luckysheet-rich-text-editor").html(dateStr);
-                debugger;
                 setCellValue(r, c, currentVal, { isRefresh: false })
                 setCellFormat(r, c, 'ct', cell.ct)
                 if (!enableTime) {

@@ -8,6 +8,7 @@ import { luckysheetrefreshgrid } from '../global/refresh';
 import editor from '../global/editor';
 import ReferSelect from '../expendPlugins/referSelect/referSelect';
 import { setCellValue, setCellFormat } from '../global/api';
+import formula from '../global/formula';
 
 // 下拉选项
 const option = {label: '', value: ''};
@@ -230,13 +231,18 @@ const selectListCtrl = {
 
     const rs = new ReferSelect('#luckysheet-input-box', {
         ..._this.selectList[`${r}_${c}`],
+        onClose() {
+            setTimeout(() => {
+                rs.destroy()
+            }, 0);
+        },
         onChange: function(selectedOpts) {
-            debugger;
             console.log('selectedOpts', selectedOpts)
             let currentVal = selectedOpts.value;
             $("#luckysheet-rich-text-editor").html(currentVal);
             setCellValue(r, c, currentVal, { isRefresh: false })
             setCellFormat(r, c, 'ct', cell.ct)
+            formula.updatecell(Store.luckysheetCellUpdate[0], Store.luckysheetCellUpdate[1]);
         }
     });
 

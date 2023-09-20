@@ -55,13 +55,14 @@ ReferSelect.prototype.createOptions = function () {
     let optionsStr = ''
     $.each(this.options, (index, option) => {
         console.log('option', option)
-        optionsStr += `<div class="refer-select-item" data-index=${index}>${option.label}</div>`
+        optionsStr += `<div class="refer-select-item luckysheet-mousedown-cancel" data-index=${index}>${option.label}</div>`
     })
     this.dropDownWrapper.html(optionsStr);
 
     this.dropDownWrapper.off('click.item').on('click.item', (e) => {
        let dataIdx = $(e.target).attr('data-index');
        this.config.onChange && this.config.onChange(this.options[dataIdx]);
+       this.config.onClose &&  this.config.onClose();
     })
 
 }
