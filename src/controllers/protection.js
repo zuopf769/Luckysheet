@@ -430,7 +430,7 @@ export function initialEvent(file){
         let txt = $(this).parents("#luckysheet-dataVerificationRange-dialog").find("input").val();
 
         let $input = $("#protection-allowRangeAdd-range input"), inputValue = $input.val();
-        if(inputValue.substr(inputValue.length-1, 1)==","){
+        if(inputValue && inputValue.substr(inputValue.length-1, 1)==","){
             $input.val(inputValue + txt);
         }
         else{

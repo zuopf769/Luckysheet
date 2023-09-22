@@ -848,7 +848,6 @@ export default function luckysheetHandler() {
                 Store.luckysheet_select_status = false;
 
                 if (event.shiftKey) {
-                    debugger;
                     let last = dataVerificationCtrl.selectRange[dataVerificationCtrl.selectRange.length - 1];
 
                     let top = 0,
