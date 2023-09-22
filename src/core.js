@@ -182,7 +182,7 @@ luckysheet.create = function (setting) {
         });
     }
 
-    initChat()
+    // initChat()
 };
 
 function initialWorkBook() {
