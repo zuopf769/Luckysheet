@@ -8,6 +8,7 @@ import imageCtrl from "./imageCtrl";
 import hyperlinkCtrl from "./hyperlinkCtrl";
 import selectListCtrl from "./selectListCtrl";
 import dataVerificationCtrl from "./dataVerificationCtrl";
+import cellEditableCtrl from "./cellEditableCtrl";
 import menuButton from "./menuButton";
 import conditionformat from "./conditionformat";
 import alternateformat from "./alternateformat";
@@ -847,6 +848,7 @@ export default function luckysheetHandler() {
                 Store.luckysheet_select_status = false;
 
                 if (event.shiftKey) {
+                    debugger;
                     let last = dataVerificationCtrl.selectRange[dataVerificationCtrl.selectRange.length - 1];
 
                     let top = 0,
@@ -5577,6 +5579,34 @@ export default function luckysheetHandler() {
     //Cell format
     $("#luckysheetCellFormatRightClickMenu").click(function() {
         openCellFormatModel();
+    });
+
+    //Cell Editable
+    $("#luckysheetCellEditableRightClickMenu").click(function() {
+        // *如果禁止前台编辑，则中止下一步操作
+        if (!checkIsAllowEdit()) {
+            tooltip.info("", locale().pivotTable.errorNotAllowEdit);
+        }
+        if (!checkProtectionNotEnable(Store.currentSheetIndex)) {
+            return;
+        }
+        $("#luckysheet-rightclick-menu").hide();
+        cellEditableCtrl.createDialog();
+        cellEditableCtrl.init();
+    });
+
+    //Cell NoEditable
+    $("#luckysheetCellNoEditableRightClickMenu").click(function() {
+        // *如果禁止前台编辑，则中止下一步操作
+        if (!checkIsAllowEdit()) {
+            tooltip.info("", locale().pivotTable.errorNotAllowEdit);
+        }
+        if (!checkProtectionNotEnable(Store.currentSheetIndex)) {
+            return;
+        }
+        $("#luckysheet-rightclick-menu").hide();
+        cellEditableCtrl.createDialog();
+        cellEditableCtrl.init();
     });
 
     //冻结行列

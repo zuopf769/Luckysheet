@@ -38,7 +38,7 @@ function addRangeItem(item){
     const locale_button = _locale.button;
 
     let title = item.name, sqref = item.sqref, password = item.password;
-    
+
     let passwordTxt = "";
     if(password!=null && password.length>0){
         passwordTxt = '<i class="icon iconfont-luckysheet luckysheet-iconfont-bianji2" title="'+ local_protection.rangeItemHasPassword+'"></i>';
@@ -80,8 +80,8 @@ export function initialEvent(file){
 
         if(file!=null && file.config!=null && file.config.authority!=null){
             aut = file.config.authority;
-        }        
-        
+        }
+
         let authorityData = {
 
         }
@@ -111,7 +111,7 @@ export function initialEvent(file){
             let name = authorityItemArr[i];
             let checkId = "luckysheet-protection-check-" + name;
             let authorityValue =  $("#"+checkId).is(':checked');
-            
+
             authorityData[name] = authorityValue==true?1:0;
         }
 
@@ -290,7 +290,7 @@ export function initialEvent(file){
             luckysheetsizeauto();
             return;
         }
-        
+
         let $input = $validation.find("input");
         let password = $input.val();
 
@@ -321,10 +321,10 @@ export function initialEvent(file){
         else{
             alert(local_protection.checkPasswordWrongalert);
         }
-        
+
     });
 
-    $("#luckysheet-protection-check-selectLockedCells").change(function() { 
+    $("#luckysheet-protection-check-selectLockedCells").change(function() {
         let $selectLockedCells = $("#luckysheet-protection-check-selectLockedCells"), $selectunLockedCells = $("#luckysheet-protection-check-selectunLockedCells");
 
         let selectLockedCellsChecked = $selectLockedCells.is(":checked"), selectunLockedCellsChecked = $selectunLockedCells.is(":checked");
@@ -334,7 +334,7 @@ export function initialEvent(file){
         }
     });
 
-    $("#luckysheet-protection-check-selectunLockedCells").change(function() { 
+    $("#luckysheet-protection-check-selectunLockedCells").change(function() {
         let $selectLockedCells = $("#luckysheet-protection-check-selectLockedCells"), $selectunLockedCells = $("#luckysheet-protection-check-selectunLockedCells");
 
         let selectLockedCellsChecked = $selectLockedCells.is(":checked"), selectunLockedCellsChecked = $selectunLockedCells.is(":checked");
@@ -350,7 +350,7 @@ export function initialEvent(file){
         $("#luckysheet-protection-rangeItem-dialog").hide();
 
         let dataSource = "0";
-        let txt = $(this).siblings("input").val().trim(); 
+        let txt = $(this).siblings("input").val().trim();
 
         dataVerificationCtrl.rangeDialog(dataSource, txt);
 
@@ -362,35 +362,35 @@ export function initialEvent(file){
                 let r1 = range[s].row[0], r2 = range[s].row[1];
                 let c1 = range[s].column[0], c2 = range[s].column[1];
 
-                let row = Store.visibledatarow[r2], 
+                let row = Store.visibledatarow[r2],
                     row_pre = r1 - 1 == -1 ? 0 : Store.visibledatarow[r1 - 1];
-                let col = Store.visibledatacolumn[c2], 
+                let col = Store.visibledatacolumn[c2],
                     col_pre = c1 - 1 == -1 ? 0 : Store.visibledatacolumn[c1 - 1];
 
-                dataVerificationCtrl.selectRange.push({ 
-                    "left": col_pre, 
-                    "width": col - col_pre - 1, 
-                    "top": row_pre, 
-                    "height": row - row_pre - 1, 
-                    "left_move": col_pre, 
-                    "width_move": col - col_pre - 1, 
-                    "top_move": row_pre, 
-                    "height_move": row - row_pre - 1, 
-                    "row": [r1, r2], 
-                    "column": [c1, c2], 
-                    "row_focus": r1, 
-                    "column_focus": c1 
+                dataVerificationCtrl.selectRange.push({
+                    "left": col_pre,
+                    "width": col - col_pre - 1,
+                    "top": row_pre,
+                    "height": row - row_pre - 1,
+                    "left_move": col_pre,
+                    "width_move": col - col_pre - 1,
+                    "top_move": row_pre,
+                    "height_move": row - row_pre - 1,
+                    "row": [r1, r2],
+                    "column": [c1, c2],
+                    "row_focus": r1,
+                    "column_focus": c1
                 });
             }
         }
-        
+
         selectionCopyShow(dataVerificationCtrl.selectRange);
-    }); 
+    });
     $(document).off("click.luckysheetProtection.dvRange2").on("click.luckysheetProtection.dvRange2", "#luckysheet-protection-rangeItem-dialog .show-box-item-dropdown .range .fa-table", function(e) {
         $("#luckysheet-protection-rangeItem-dialog").hide();
 
         let dataSource = "1";
-        let txt = $(this).siblings("input").val().trim(); 
+        let txt = $(this).siblings("input").val().trim();
 
         dataVerificationCtrl.rangeDialog(dataSource, txt);
 
@@ -402,28 +402,28 @@ export function initialEvent(file){
                 let r1 = range[s].row[0], r2 = range[s].row[1];
                 let c1 = range[s].column[0], c2 = range[s].column[1];
 
-                let row = Store.visibledatarow[r2], 
+                let row = Store.visibledatarow[r2],
                     row_pre = r1 - 1 == -1 ? 0 : Store.visibledatarow[r1 - 1];
-                let col = Store.visibledatacolumn[c2], 
+                let col = Store.visibledatacolumn[c2],
                     col_pre = c1 - 1 == -1 ? 0 : Store.visibledatacolumn[c1 - 1];
 
-                    dataVerificationCtrl.selectRange.push({ 
-                    "left": col_pre, 
-                    "width": col - col_pre - 1, 
-                    "top": row_pre, 
-                    "height": row - row_pre - 1, 
-                    "left_move": col_pre, 
-                    "width_move": col - col_pre - 1, 
-                    "top_move": row_pre, 
-                    "height_move": row - row_pre - 1, 
-                    "row": [r1, r2], 
-                    "column": [c1, c2], 
-                    "row_focus": r1, 
-                    "column_focus": c1 
+                    dataVerificationCtrl.selectRange.push({
+                    "left": col_pre,
+                    "width": col - col_pre - 1,
+                    "top": row_pre,
+                    "height": row - row_pre - 1,
+                    "left_move": col_pre,
+                    "width_move": col - col_pre - 1,
+                    "top_move": row_pre,
+                    "height_move": row - row_pre - 1,
+                    "row": [r1, r2],
+                    "column": [c1, c2],
+                    "row_focus": r1,
+                    "column_focus": c1
                 });
             }
         }
-        
+
         selectionCopyShow(dataVerificationCtrl.selectRange);
     });
     $(document).off("click.luckysheetProtection.dvRangeConfirm").on("click.luckysheetProtection.dvRangeConfirm", "#luckysheet-dataVerificationRange-dialog-confirm", function(e) {
@@ -470,10 +470,10 @@ function initialProtectionRangeModal(file){
     let _locale = locale();
     let local_protection = _locale.protection;
     const locale_button = _locale.button;
-    $("body").append(replaceHtml(modelHTML, { 
-        "id": "luckysheet-protection-rangeItem-dialog", 
-        "addclass": "luckysheet-protection-rangeItem-dialog", 
-        "title": local_protection.allowRangeTitle, 
+    $("body").append(replaceHtml(modelHTML, {
+        "id": "luckysheet-protection-rangeItem-dialog",
+        "addclass": "luckysheet-protection-rangeItem-dialog",
+        "title": local_protection.allowRangeTitle,
         "content": `
             <div class="luckysheet-protection-rangeItem-content">
                 <div class="luckysheet-slider-protection-row">
@@ -512,10 +512,10 @@ function initialProtectionRangeModal(file){
                     </div>
                 </div>
             </div>
-        `, 
+        `,
         "botton":  `<button id="luckysheet-protection-rangeItem-confirm" class="btn btn-primary">${locale_button.insert}</button>
-                    <button class="btn btn-default luckysheet-model-close-btn">${locale_button.cancel}</button>`, 
-        "style": "z-index:100003" 
+                    <button class="btn btn-default luckysheet-model-close-btn">${locale_button.cancel}</button>`,
+        "style": "z-index:100003"
     }));
 }
 
@@ -579,7 +579,7 @@ function initialProtectionRIghtBar(file){
                 </div>
 
                 <div id="luckysheet-protection-rangeItem-container" class="luckysheet-slider-protection-row" style="top:25px;bottom:0px;position:absolute">
-                   
+
                 </div>
             </div>
             <div class="luckysheet-slider-protection-config" style="bottom:0px;height:45px">
@@ -602,10 +602,10 @@ function initialProtectionRIghtBar(file){
 
 
     //Password input initial for sheet Protection
-    $("body").append(replaceHtml(modelHTML, { 
-        "id": "luckysheet-protection-sheet-validation", 
-        "addclass": "luckysheet-protection-sheet-validation", 
-        "title": local_protection.validationTitle, 
+    $("body").append(replaceHtml(modelHTML, {
+        "id": "luckysheet-protection-sheet-validation",
+        "addclass": "luckysheet-protection-sheet-validation",
+        "title": local_protection.validationTitle,
         "content": `
             <div class="luckysheet-slider-protection-row">
                 <div class="luckysheet-slider-protection-column luckysheet-protection-column-10x">
@@ -617,10 +617,10 @@ function initialProtectionRIghtBar(file){
                     <input type="password" class="luckysheet-protection-rangeItemiInput" placeHolder="${local_protection.validationInputHint}">
                 </div>
             </div>
-        `, 
+        `,
         "botton":  `<button id="luckysheet-protection-sheet-validation-confirm" class="btn btn-primary">${locale_button.confirm}</button>
-                    <button class="btn btn-default luckysheet-model-close-btn">${locale_button.cancel}</button>`, 
-        "style": "z-index:100003" 
+                    <button class="btn btn-default luckysheet-model-close-btn">${locale_button.cancel}</button>`,
+        "style": "z-index:100003"
     }));
 
 }
@@ -797,7 +797,7 @@ function checkProtectionLockedSqref(r, c, aut, local_protection, isOpenAlert=tru
         tooltip.info("", ht);
         $("#luckysheet-selection-copy .luckysheet-selection-copy").hide();
     }
-    
+
     return isPass;
 }
 
@@ -806,17 +806,17 @@ function openRangePasswordModal(rangeAut) {
     const _locale = locale();
     const local_protection = _locale.protection;
     const locale_button = _locale.button;
-    
+
     if(!initialRangePasswordHtml){
         //Password input initial for range
-        $("body").append(replaceHtml(modelHTML, { 
-            "id": "luckysheet-protection-range-validation", 
-            "addclass": "luckysheet-protection-sheet-validation", 
-            "title": local_protection.validationTitle, 
+        $("body").append(replaceHtml(modelHTML, {
+            "id": "luckysheet-protection-range-validation",
+            "addclass": "luckysheet-protection-sheet-validation",
+            "title": local_protection.validationTitle,
             "content": `
                 <div class="luckysheet-slider-protection-row">
                     <div id="luckysheet-protection-range-validation-hint" class="luckysheet-slider-protection-column luckysheet-protection-column-10x">
-                        
+
                     </div>
                 </div>
                 <div class="luckysheet-slider-protection-row" style="margin-top:20px">
@@ -824,17 +824,17 @@ function openRangePasswordModal(rangeAut) {
                         <input type="password" class="luckysheet-protection-rangeItemiInput" placeHolder="${local_protection.validationInputHint}">
                     </div>
                 </div>
-            `, 
+            `,
             "botton":  `<button id="luckysheet-protection-range-validation-confirm" class="btn btn-primary">${locale_button.confirm}</button>
-                        <button class="btn btn-default luckysheet-model-close-btn">${locale_button.cancel}</button>`, 
-            "style": "z-index:100003" 
+                        <button class="btn btn-default luckysheet-model-close-btn">${locale_button.cancel}</button>`,
+            "style": "z-index:100003"
         }));
     }
 
     initialRangePasswordHtml = true;
 
 
-    
+
     openSelfModel("luckysheet-protection-range-validation");
 
     let $hint = $("#luckysheet-protection-range-validation-hint");
@@ -878,7 +878,7 @@ function openRangePasswordModal(rangeAut) {
         }
 
     });
-    
+
 }
 
 //protection state
@@ -1056,12 +1056,12 @@ export function checkProtectionSelectLockedOrUnLockedCells(r, c, sheetIndex){
         }
     }
 
-    
+
 }
 
 
 
-//selectLockedCells or selectunLockedCells authority, highlight cell 
+//selectLockedCells or selectunLockedCells authority, highlight cell
 export function checkProtectionAllSelected(sheetIndex){
     const _locale = locale();
     const local_protection = _locale.protection;
@@ -1144,7 +1144,7 @@ export function checkProtectionFormatCells(sheetIndex){
 //sort authority
 //filter authority
 //usePivotTablereports authority
-//editObjects authority: insert,delete,update for image, chart, comment,shape etc. 
+//editObjects authority: insert,delete,update for image, chart, comment,shape etc.
 //editScenarios authority: Scenarios features is uncompleted
 
 export function checkProtectionAuthorityNormal(sheetIndex, type="formatColumns", isAlert=true){
@@ -1171,7 +1171,7 @@ export function checkProtectionAuthorityNormal(sheetIndex, type="formatColumns",
     if(isAlert){
         const _locale = locale();
         const local_protection = _locale.protection;
-        
+
         let ht;
         if(aut.hintText != null && aut.hintText.length>0){
             ht = aut.hintText;

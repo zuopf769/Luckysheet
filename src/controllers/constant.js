@@ -625,6 +625,20 @@ function rightclickHTML() {
                             toolbar.cellFormat
                         }</div>
                     </div>
+                    <div id="luckysheetCellEditableRightClickMenu" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
+                        config.cellEditable ? "block" : "none"
+                    };">
+                        <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
+                            rightclick.cellEditable
+                        }</div>
+                    </div>
+                    <div id="luckysheetCellNoEditableRightClickMenu" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel" style="display:${
+                        config.cellNoEditable ? "block" : "none"
+                    };">
+                        <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
+                            rightclick.cellNoEditable
+                        }</div>
+                    </div>
                     ${customsButtons}
                 </div>
             </div>
@@ -1482,6 +1496,8 @@ function customCellRightClickConfig() {
         select: true, // insert select
         data: true, // data verification
         cellFormat: true, // Set cell format
+        cellEditable: true, // Set cell editable
+        cellNoEditable: true // Set cell uneditable
     };
 
     // cellRightClickConfig determines the final result

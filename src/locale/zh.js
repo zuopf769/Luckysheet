@@ -6655,6 +6655,8 @@ export default {
         byRow: "按行",
         byCol: "按列",
         generateNewMatrix: "生成新矩阵",
+        cellEditable: "可编辑",
+        cellNoEditable: "不可编辑"
     },
     comment: {
         insert: "新建批注",
@@ -7041,6 +7043,11 @@ export default {
         tooltipInfo6: "输入的值不是日期类型",
         tooltipInfo7: "日期2不能小于日期1",
         textlengthInteger: "文本长度必须是大于等于0的整数",
+    },
+    cellEditable: {
+        cellRange: "单元格范围",
+        selectCellRange: "点击选择单元格范围",
+        selectCellRange2: "请选择单元格范围",
     },
     formula: {
         sum: "求和",

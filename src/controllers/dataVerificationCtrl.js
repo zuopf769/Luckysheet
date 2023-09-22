@@ -283,6 +283,7 @@ const dataVerificationCtrl = {
 
         //单元格范围
         $(document).off("click.dvRange").on("click.dvRange", "#data-verification-range .fa-table", function(e) {
+            debugger;
             $("#luckysheet-dataVerification-dialog").hide();
 
             let dataSource = "0";
@@ -849,6 +850,7 @@ const dataVerificationCtrl = {
         });
     },
     dataAllocation: function(){
+        debugger;
         let _this = this;
 
         //单元格范围
@@ -956,6 +958,7 @@ const dataVerificationCtrl = {
         $("#luckysheet-dataVerification-dialog .data-verification-hint-text input").val(item.hintText);
     },
     rangeDialog: function(dataSource, txt){
+        debugger;
         let _this = this;
 
         const _locale = locale();

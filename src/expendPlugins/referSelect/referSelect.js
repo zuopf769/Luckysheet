@@ -3,7 +3,6 @@ import { generateRandomKey } from "../../utils/chartUtil";
 
 // 参照下拉框组件
 var ReferSelect = function (target, config) {
-    debugger;
     this.target = $(target);
     this.config = config;
     this.options = this.config.options;
