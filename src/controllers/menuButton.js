@@ -3244,8 +3244,8 @@ const menuButton = {
                                                     <input id="conditionVal" class="formulaInputFocus"/>
                                                     <i class="fa fa-table" aria-hidden="true" title="${conditionformat_text.selectCell}"></i>
                                                 </div>
-                                                <div style="margin: 5px 0;">${conditionformat_text.setAs}：</div> 
-                                                ${textCellColorHtml} 
+                                                <div style="margin: 5px 0;">${conditionformat_text.setAs}：</div>
+                                                ${textCellColorHtml}
                                             </div>`;
                                         break;
                                     case "lessThan":

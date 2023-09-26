@@ -1,54 +1,24 @@
 import locale from '../locale/locale';
-import { replaceHtml,transformRangeToAbsolute } from '../utils/util';
-import { modelHTML } from './constant';
+import { transformRangeToAbsolute } from '../utils/util';
 import Store from '../store';
-import { getSheetIndex, getRangetxt } from '../methods/get';
+import { getRangetxt } from '../methods/get';
 import dataVerificationCtrl from './dataVerificationCtrl';
 import { selectionCopyShow } from './select';
 import sheetmanage from "./sheetmanage";
+import editor from "../global/editor";
+import { jfrefreshgrid, luckysheetrefreshgrid } from "../global/refresh";
 
 // 通过选区控制单元格是否可编辑
 const cellEditableCtrl = {
-    editable: false,// 是否可编辑
+    editableStatus: false,// 是否可编辑
     selectRange: [], // 框选的单元格range
-    createDialog2: function(){
-        let _this = this;
-
-        const _locale = locale();
-        const ceText = _locale.cellEditable;
-        const buttonText = _locale.button;
-
-        $("#luckysheet-cellEditable-dialog").remove();
-
-        $("body").append(replaceHtml(modelHTML, {
-            "id": "luckysheet-cellEditable-dialog",
-            "addclass": "luckysheet-cellEditable-dialog",
-            "title": ceText.selectCellRange,
-            "content": `<input readonly="readonly" placeholder="${ceText.selectCellRange2}"/>`,
-            "botton":  `<button id="luckysheet-cellEditable-dialog-confirm" class="btn btn-primary">${buttonText.confirm}</button>
-                        <button id="luckysheet-cellEditable-dialog-close" class="btn btn-default">${buttonText.close}</button>`,
-            "style": "z-index:100003"
-        }));
-        let $t = $("#luckysheet-cellEditable-dialog")
-                .find(".luckysheet-modal-dialog-content")
-                .css("min-width", 300)
-                .end(),
-            myh = $t.outerHeight(),
-            myw = $t.outerWidth();
-        let winw = $(window).width(), winh = $(window).height();
-        let scrollLeft = $(document).scrollLeft(), scrollTop = $(document).scrollTop();
-        $("#luckysheet-cellEditable-dialog").css({
-            "left": (winw + scrollLeft - myw) / 2,
-            "top": (winh + scrollTop - myh) / 3
-        }).show();
-
-        _this.dataAllocation2();
-    },
-    createDialog: function() {
+    createDialog: function(editableStatus) {
         let _this = this;
 
         let dataSource = "0";
         let txt ='';
+
+        _this.editableStatus = editableStatus;
 
         dataVerificationCtrl.rangeDialog(dataSource, txt);
 
@@ -88,16 +58,7 @@ const cellEditableCtrl = {
     },
     init: function() {
 
-        // 确认按钮
-        // $(document).off("click.ceRangeConfirm").on("click.ceRangeConfirm", "#luckysheet-cellEditable-dialog-confirm", function(e) {
-        //     $("#luckysheet-cellEditable-dialog").hide();
-        // })
-
-        // 取消按钮
-        // $(document).off("click.ceRangeClose").on("click.ceRangeClose", "#luckysheet-cellEditable-dialog-close", function(e) {
-        //     $("#luckysheet-cellEditable-dialog").hide();
-        // });
-
+        var _this = this;
         // 确认按钮
         $(document).off("click.luckysheetCellEditable.ceRangeConfirm").on("click.luckysheetCellEditable.ceRangeConfirm", "#luckysheet-dataVerificationRange-dialog-confirm", function(e) {
 
@@ -139,6 +100,24 @@ const cellEditableCtrl = {
 
             let emptyRange = [];
             selectionCopyShow(emptyRange);
+
+            let d = editor.deepCopyFlowData(Store.flowdata);
+
+            console.log('sheet data: ', d);
+
+            console.log('Store.luckysheet_select_save', Store.luckysheet_select_save)
+
+            for (let s = 0; s < Store.luckysheet_select_save.length; s++) {
+                let row_st = Store.luckysheet_select_save[s]["row"][0],
+                    row_ed = Store.luckysheet_select_save[s]["row"][1];
+                let col_st = Store.luckysheet_select_save[s]["column"][0],
+                    col_ed = Store.luckysheet_select_save[s]["column"][1];
+
+                _this.updateEditableCell(d, _this.editableStatus, row_st, row_ed, col_st, col_ed);
+
+
+            }
+            jfrefreshgrid(d, Store.luckysheet_select_save);
         });
         // 关闭按钮
         $(document).off("click..ceRangeClose").on("click.luckysheetCellEditable.ceRangeClose", "#luckysheet-dataVerificationRange-dialog-close", function(e) {
@@ -163,21 +142,43 @@ const cellEditableCtrl = {
         });
 
     },
-    dataAllocation2: function(){
-        let _this = this;
-
-        //单元格范围
-        let range = Store.luckysheet_select_save[Store.luckysheet_select_save.length - 1];
-        let rangeTxt = getRangetxt(Store.currentSheetIndex, range, Store.currentSheetIndex);
-        $("#luckysheet-cellEditable-dialog .luckysheet-modal-dialog-content input").val(rangeTxt);
-    },
     dataAllocation: function(){
         let _this = this;
         //单元格范围
         let range = Store.luckysheet_select_save[Store.luckysheet_select_save.length - 1];
         let rangeTxt = getRangetxt(Store.currentSheetIndex, range, Store.currentSheetIndex);
         $("#luckysheet-dataVerificationRange-dialog .luckysheet-modal-dialog-content input").val(rangeTxt);
+    },
+    updateEditableCell: function(d, editableStatus, row_st, row_ed, col_st, col_ed) {
+        if (d == null || editableStatus == null) {
+            return;
+        }
+
+        for (let r = row_st; r <= row_ed; r++) {
+            if (Store.config["rowhidden"] != null && Store.config["rowhidden"][r] != null) {
+                continue;
+            }
+
+            for (let c = col_st; c <= col_ed; c++) {
+                let cell = d[r][c];
+                if (!cell.customKey) {
+                    cell.customKey = {};
+                }
+                cell.customKey.editable = editableStatus;
+                console.log('cell', cell);
+            }
+        }
+
+
     }
+}
+
+export function checkCellEditable(d, r, c) {
+    let cell = d[r][c];
+    if (cell && cell.customKey && cell.customKey.editable === false) {
+        return false;
+    }
+    return true;
 }
 
 export default cellEditableCtrl;

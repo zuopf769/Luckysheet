@@ -5,6 +5,7 @@ import conditionformat from './conditionformat';
 import alternateformat from './alternateformat';
 import cellDatePickerCtrl from './cellDatePickerCtrl';
 import dataVerificationCtrl from './dataVerificationCtrl';
+import { checkCellEditable } from './cellEditableCtrl';
 import selectListCtrl from "./selectListCtrl";
 import {checkProtectionLocked,checkProtectionCellHidden}  from './protection';
 import { chatatABC } from '../utils/util';
@@ -26,6 +27,11 @@ export function luckysheetupdateCell(row_index1, col_index1, d, cover, isnotfocu
     }
 
     if(isEditMode() || Store.allowEdit===false){//此模式下禁用单元格编辑
+        return;
+    }
+
+    // 自定义单元格可编辑及不可编辑
+    if (!checkCellEditable(d, row_index1, col_index1)) {
         return;
     }
 

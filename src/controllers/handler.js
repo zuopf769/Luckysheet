@@ -5590,7 +5590,7 @@ export default function luckysheetHandler() {
             return;
         }
         $("#luckysheet-rightclick-menu").hide();
-        cellEditableCtrl.createDialog();
+        cellEditableCtrl.createDialog(true);
         cellEditableCtrl.init();
     });
 
@@ -5604,7 +5604,7 @@ export default function luckysheetHandler() {
             return;
         }
         $("#luckysheet-rightclick-menu").hide();
-        cellEditableCtrl.createDialog();
+        cellEditableCtrl.createDialog(false);
         cellEditableCtrl.init();
     });
 
