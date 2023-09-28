@@ -346,6 +346,7 @@ const columeHeader_word = [
 function rightclickHTML() {
     const _locale = locale();
     const rightclick = _locale.rightclick;
+    const colTypes = _locale.colTypes;
     const toolbar = _locale.toolbar;
 
     const config = customCellRightClickConfig();
@@ -385,6 +386,19 @@ function rightclickHTML() {
         .join("");
 
     const rightclickContainer = `<div id="luckysheet-rightclick-menu" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-mousedown-cancel">
+                <div id="luckysheet-col-type-wrap">
+                    <div id="luckysheet-col-type" class="luckysheet-cols-menuitem luckysheet-cols-submenu luckysheet-mousedown-cancel luckysheet-copy-btn" data-clipboard-action="copy" data-clipboard-target="#luckysheet-copy-content" style="display:${
+                        config.colType ? "block" : "none"
+                    };">
+                        <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">
+                            ${rightclick.colType}
+                            <span class="luckysheet-submenu-arrow iconfont-luckysheet luckysheet-iconfont-youjiantou" style="user-select: none;"></span>
+                        </div>
+                    </div>
+                    <div class="luckysheet-menuseparator luckysheet-mousedown-cancel" role="separator" style="display:${
+                        config.colType ? "block" : "none"
+                    };"></div>
+                </div>
                 <div id="luckysheet-copy-btn" class="luckysheet-cols-menuitem luckysheet-mousedown-cancel luckysheet-copy-btn" data-clipboard-action="copy" data-clipboard-target="#luckysheet-copy-content" style="display:${
                     config.copy ? "block" : "none"
                 };">
@@ -694,6 +708,14 @@ function rightclickHTML() {
                 <div id="luckysheet-copy-boolvalue" data-clipboard-action="copy" data-clipboard-target="#luckysheet-copy-content" class="luckysheet-cols-menuitem luckysheet-copy-btn luckysheet-mousedown-cancel">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         rightclick.boolean
+                    }</div>
+                </div>
+            </div>
+
+            <div id="luckysheet-col-type_sub" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-rightgclick-menu-sub luckysheet-mousedown-cancel">
+                <div id="luckysheet-copy-json-head" data-clipboard-action="copy" data-clipboard-target="#luckysheet-copy-content" class="luckysheet-cols-menuitem luckysheet-copy-btn luckysheet-mousedown-cancel">
+                    <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
+                        colTypes.select
                     }</div>
                 </div>
             </div>
@@ -1474,6 +1496,7 @@ const iconfontObjects = {
  */
 function customCellRightClickConfig() {
     const config = {
+        colType: true, // 列类型
         copy: true, // copy
         copyAs: true, // copy as
         paste: true, // paste

@@ -6594,7 +6594,11 @@ export default {
         valueBlank: "(空白)",
         mergeError: "筛选选区有合并单元格，无法执行此操作！",
     },
+    colTypes: {
+        select: "下拉"
+    },
     rightclick: {
+        colType: "列类型",
         copy: "复制",
         copyAs: "复制为",
         paste: "粘贴",

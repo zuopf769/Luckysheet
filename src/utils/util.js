@@ -459,6 +459,7 @@ function luckysheetfontformat(format) {
 
 //右键菜单
 function showrightclickmenu($menu, x, y) {
+    debugger;
     let winH = $(window).height(),
         winW = $(window).width();
     let menuW = $menu.width(),
