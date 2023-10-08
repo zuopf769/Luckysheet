@@ -12,6 +12,7 @@ import { initialMatrixOperation } from "./controllers/matrixOperation";
 import { initialSheetBar } from "./controllers/sheetBar";
 import { formulaBarInitial } from "./controllers/formulaBar";
 import { rowColumnOperationInitial } from "./controllers/rowColumnOperation";
+import { columnTypeOperation } from "./controllers/columnTypeOperation";
 import { keyboardInitial } from "./controllers/keyboard";
 import { orderByInitial } from "./controllers/orderBy";
 import { initPlugins } from "./controllers/expendPlugins";
@@ -54,7 +55,6 @@ luckysheet.create = function (setting) {
             Store.toJsonOptions[c] = setting[c];
         }
     }
-
     let extendsetting = common_extend(defaultSetting, setting);
 
     let loadurl = extendsetting.loadUrl,
@@ -114,6 +114,8 @@ luckysheet.create = function (setting) {
     luckysheetConfigsetting.pageInfo = extendsetting.pageInfo;
 
     luckysheetConfigsetting.editMode = extendsetting.editMode;
+    luckysheetConfigsetting.designMode = extendsetting.designMode;
+    luckysheetConfigsetting.isColumnMode = extendsetting.isColumnMode;
     luckysheetConfigsetting.beforeCreateDom = extendsetting.beforeCreateDom;
     luckysheetConfigsetting.workbookCreateBefore = extendsetting.workbookCreateBefore;
     luckysheetConfigsetting.workbookCreateAfter = extendsetting.workbookCreateAfter;
@@ -192,6 +194,7 @@ function initialWorkBook() {
     initialSheetBar(); //bottom sheet bar initialization
     formulaBarInitial(); //top formula bar initialization
     rowColumnOperationInitial(); //row and coloumn operate initialization
+    columnTypeOperation(); // column type operate
     keyboardInitial(); //Keyboard operate initialization
     orderByInitial(); //menu bar orderby function initialization
     zoomInitial(); //zoom method initialization

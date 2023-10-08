@@ -5164,7 +5164,6 @@ export default function luckysheetHandler() {
             }
             return;
         }
-
         luckysheetextendtable("row", Store.flowdata.length - 1, value);
     });
 

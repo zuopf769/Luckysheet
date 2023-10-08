@@ -5,6 +5,7 @@ import { hasChinaword, isRealNum } from "../global/validate";
 import Store from "../store";
 import locale from "../locale/locale";
 import numeral from "numeral";
+import luckysheetConfigsetting from "../controllers/luckysheetConfigsetting";
 // import method from '../global/method';
 
 /**
@@ -459,7 +460,6 @@ function luckysheetfontformat(format) {
 
 //右键菜单
 function showrightclickmenu($menu, x, y) {
-    debugger;
     let winH = $(window).height(),
         winW = $(window).width();
     let menuW = $menu.width(),
@@ -888,6 +888,14 @@ function camel2split(camel) {
     });
 }
 
+/**
+ * 是否是以列维度的设计态
+ */
+function isColumnAndDesignMode() {
+    return luckysheetConfigsetting.designMode && luckysheetConfigsetting.isColumnMode;
+}
+
+
 export {
     isJsonString,
     common_extend,
@@ -917,5 +925,6 @@ export {
     openSelfModel,
     createProxy,
     arrayRemoveItem,
-    camel2split
+    camel2split,
+    isColumnAndDesignMode
 };

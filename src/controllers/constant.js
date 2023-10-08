@@ -713,7 +713,7 @@ function rightclickHTML() {
             </div>
 
             <div id="luckysheet-col-type_sub" class="luckysheet-cols-menu luckysheet-rightgclick-menu luckysheet-rightgclick-menu-sub luckysheet-mousedown-cancel">
-                <div id="luckysheet-copy-json-head" data-clipboard-action="copy" data-clipboard-target="#luckysheet-copy-content" class="luckysheet-cols-menuitem luckysheet-copy-btn luckysheet-mousedown-cancel">
+                <div id="luckysheet-col-type-select" class="luckysheet-cols-menuitem luckysheet-copy-btn luckysheet-mousedown-cancel">
                     <div class="luckysheet-cols-menuitem-content luckysheet-mousedown-cancel">${
                         colTypes.select
                     }</div>

@@ -47,7 +47,9 @@ export default {
         "totalPage":10,
         "pageUrl":"",
     },
-    editMode: false, //是否为编辑模式
+    editMode: false, // 是否为编辑模式
+    designMode: false, // 是否为设计模式 true为设计态 false是填报态
+    isColumnMode: false, // 是否列维度表格 false为单元格维度 true为以列为维度
     beforeCreateDom: null,//表格创建之前的方法
     fireMousedown: null, //单元格数据下钻
     lang: 'en', //language

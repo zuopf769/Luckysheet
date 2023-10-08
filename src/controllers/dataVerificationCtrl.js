@@ -1,4 +1,4 @@
-import { replaceHtml } from '../utils/util';
+import { replaceHtml, isColumnAndDesignMode } from '../utils/util';
 import formula from '../global/formula';
 import { isRealNum, isRealNull } from '../global/validate';
 import { isdatetime, diff } from '../global/datecontroll';
@@ -15,6 +15,8 @@ import sheetmanage from './sheetmanage';
 import { getSheetIndex, getRangetxt } from '../methods/get';
 import locale from '../locale/locale';
 import Store from '../store';
+import luckysheetConfigsetting from "./luckysheetConfigsetting";
+import { setColDataVerification2Config } from "./columnTypeOperation";
 
 const dataVerificationCtrl = {
     defaultItem: {
@@ -622,6 +624,11 @@ const dataVerificationCtrl = {
         //确认按钮
         $(document).off("click.dvSaveConfirm").on("click.dvSaveConfirm", "#luckysheet-dataVerification-dialog-confirm", function(e) {
             let rangeTxt = $("#luckysheet-dataVerification-dialog #data-verification-range input").val().trim();
+            // 设计态且列维度
+            if (isColumnAndDesignMode()) {
+                // 单元格范围是除了
+                rangeTxt = `${rangeTxt.substring(0,1)}${Store.flowdata.length+1}`
+            }
             let range = _this.getRangeByTxt(rangeTxt);
 
             if(range.length == 0){
@@ -784,25 +791,33 @@ const dataVerificationCtrl = {
                 hintText: hintText,
             }
 
-            let historyDataVerification = $.extend(true, {}, _this.dataVerification);
-            let currentDataVerification = $.extend(true, {}, _this.dataVerification);
 
-            for(let r = str; r <= edr; r++){
-                for(let c = stc; c <= edc; c++){
-                    currentDataVerification[r + '_' + c] = item;
+            // 设计态且列维度
+            if (isColumnAndDesignMode()) {
+                // 设置当前列的数据验证配置到config
+                setColDataVerification2Config(stc, item);
+            } else {
+                let historyDataVerification = $.extend(true, {}, _this.dataVerification);
+                let currentDataVerification = $.extend(true, {}, _this.dataVerification);
 
-                    if(type == 'checkbox'){
-                        setcellvalue(r, c, d, item.value2);
+                for(let r = str; r <= edr; r++){
+                    for(let c = stc; c <= edc; c++){
+                        currentDataVerification[r + '_' + c] = item;
+
+                        if(type == 'checkbox'){
+                            setcellvalue(r, c, d, item.value2);
+                        }
                     }
+                }
+
+                if(type == 'checkbox'){
+                    _this.refOfCheckbox(historyDataVerification, currentDataVerification, Store.currentSheetIndex, d, range[range.length - 1]);
+                }
+                else{
+                    _this.ref(historyDataVerification, currentDataVerification, Store.currentSheetIndex);
                 }
             }
 
-            if(type == 'checkbox'){
-                _this.refOfCheckbox(historyDataVerification, currentDataVerification, Store.currentSheetIndex, d, range[range.length - 1]);
-            }
-            else{
-                _this.ref(historyDataVerification, currentDataVerification, Store.currentSheetIndex);
-            }
 
             $("#luckysheet-modal-dialog-mask").hide();
             $("#luckysheet-dataVerification-dialog").hide();
@@ -851,10 +866,19 @@ const dataVerificationCtrl = {
     dataAllocation: function(){
         let _this = this;
 
+        console.log('design mode', luckysheetConfigsetting.designMode)
+        console.log(' Store.flowdata.length - 1',  Store.flowdata.length)
+
         //单元格范围
         let range = Store.luckysheet_select_save[Store.luckysheet_select_save.length - 1];
         let rangeTxt = getRangetxt(Store.currentSheetIndex, range, Store.currentSheetIndex);
         $("#luckysheet-dataVerification-dialog #data-verification-range input").val(rangeTxt);
+
+        // 设计态且列维度
+        if (isColumnAndDesignMode()) {
+            // 隐藏单元格范围选择，单元范围是除去表头的所有其他新增的列
+            $("#luckysheet-dataVerification-dialog #data-verification-range").parent('.box-item').hide();
+        }
 
         //focus单元格
         let rowIndex = range.row_focus || range.row[0];

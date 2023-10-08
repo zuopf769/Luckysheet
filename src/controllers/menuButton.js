@@ -1142,7 +1142,6 @@ const menuButton = {
             if (style == null || style == "") {
                 style = "1";
             }
-
             let cfg = $.extend(true, {}, Store.config);
             if (cfg["borderInfo"] == null) {
                 cfg["borderInfo"] = [];

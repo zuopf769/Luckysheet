@@ -26,6 +26,8 @@ const luckysheetConfigsetting = {
 
 
     editMode: false,
+    designMode: false,
+    isColumnMode: false,
     beforeCreateDom: null,
     workbookCreateBefore: null,
     workbookCreateAfter: null,
