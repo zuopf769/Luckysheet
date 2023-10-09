@@ -626,7 +626,7 @@ const dataVerificationCtrl = {
             let rangeTxt = $("#luckysheet-dataVerification-dialog #data-verification-range input").val().trim();
             // 设计态且列维度
             if (isColumnAndDesignMode()) {
-                // 单元格范围是除了
+                // 单元格范围是除了目前行的新增数据
                 rangeTxt = `${rangeTxt.substring(0,1)}${Store.flowdata.length+1}`
             }
             let range = _this.getRangeByTxt(rangeTxt);
@@ -795,7 +795,7 @@ const dataVerificationCtrl = {
             // 设计态且列维度
             if (isColumnAndDesignMode()) {
                 // 设置当前列的数据验证配置到config
-                setColDataVerification2Config(stc, item);
+                setColDataVerification2Config(stc, Store.flowdata.length, item);
             } else {
                 let historyDataVerification = $.extend(true, {}, _this.dataVerification);
                 let currentDataVerification = $.extend(true, {}, _this.dataVerification);

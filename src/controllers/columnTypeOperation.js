@@ -21,7 +21,13 @@ export function columnTypeOperation() {
     });
 }
 
-export function setColDataVerification2Config(colIndex, colDataVerification) {
+/**
+ *
+ * @param {*} colIndex 列
+ * @param {*} beginIndex  从当前列的第几行开始进行设置
+ * @param {*} colDataVerification 数据验证
+ */
+export function setColDataVerification2Config(colIndex, beginIndex, colDataVerification) {
     // let sheetFile = sheetmanage.getSheetByIndex();
     // let colDataVerification = sheetFile.config.colDataVerification;
     // if (!colDataVerification) {
@@ -34,7 +40,7 @@ export function setColDataVerification2Config(colIndex, colDataVerification) {
         cfg["colDataVerification"] = {};
     }
 
-    cfg["colDataVerification"][colIndex] = colDataVerification;
+    cfg["colDataVerification"][`${colIndex}_${beginIndex}`] = colDataVerification;
 
     if (Store.clearjfundo) {
         Store.jfundo.length = 0;

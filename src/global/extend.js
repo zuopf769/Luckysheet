@@ -442,7 +442,8 @@ function luckysheetextendtable(type, index, value, direction, sheetIndex) {
         newFreezen.freezenverticaldata = luckysheetFreezen.freezenverticaldata;
     }
 
-    //数据验证配置变动
+    debugger;
+    //数据验证配置变动-单元格的优先级比整列上的优先级高
     let dataVerification = file.dataVerification;
     let newDataVerification = {};
     if (dataVerification != null) {
@@ -494,6 +495,39 @@ function luckysheetextendtable(type, index, value, direction, sheetIndex) {
             }
         }
     }
+
+    //全局列维度的数据验证配置优先级比单元格的优先级低
+    let colDataVerification = cfg.colDataVerification;
+    let newColDataVerification = {};
+    if (colDataVerification != null) {
+        for (let key in colDataVerification) {
+            // 列
+            let c = Number(key.split("_")[0]);
+            // 从第几行开始使用列的全局配置
+            let r = Number(key.split("_")[1]);
+            let item = colDataVerification[key];
+            if (type == "row") {
+                // 准备插入的行小于r-1就不管了
+                if (index < r - 1) continue;
+                if (direction == "lefttop") {
+                    // index行已经被下移到r + value处；他自身单元格的上面已经处理过了
+                    // newColDataVerification[r + value + "_" + c] = item;
+                    for (let i = 0; i < value; i++) {
+                        newColDataVerification[index + i + "_" + c] = item;
+                    }
+                } else {
+                    for (let i = 0; i < value; i++) {
+                        newColDataVerification[index + i + 1 + "_" + c] = item;
+                    }
+                }
+            } else if (type == "column") {
+
+            }
+        }
+    }
+
+    // 合并newColDataVerification和newDataVerification，后面的newDataVerification会覆盖前面的newColDataVerification
+    newDataVerification = $.extend(true, {}, newColDataVerification, newDataVerification);
 
     //超链接配置变动
     let hyperlink = file.hyperlink;
